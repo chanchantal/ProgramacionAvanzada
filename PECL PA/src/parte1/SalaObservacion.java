@@ -49,26 +49,7 @@ public class SalaObservacion {
 
     private final Condition esperar = lock.newCondition();
 
-    private final CyclicBarrier puesto1 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto2 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto3 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto4 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto5 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto6 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto7 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto8 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto9 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto10 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto11 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto12 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto13 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto14 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto15 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto16 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto17 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto18 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto19 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto20 = new CyclicBarrier(2);
+
     public SalaObservacion(JTextField puesto1Txt, JTextField puesto2Txt, JTextField puesto3Txt, JTextField puesto4Txt, JTextField puesto5Txt, JTextField puesto6Txt, JTextField puesto7Txt, JTextField puesto8Txt, JTextField puesto9Txt, JTextField puesto10Txt, JTextField puesto11Txt, JTextField puesto12Txt, JTextField puesto13Txt, JTextField puesto14Txt, JTextField puesto15Txt, JTextField puesto16Txt, JTextField puesto17Txt, JTextField puesto18Txt, JTextField puesto19Txt, JTextField puesto20Txt) {
         arrayTxt = new ArrayList<>();
         arrayTxt.add(puesto1Txt);
