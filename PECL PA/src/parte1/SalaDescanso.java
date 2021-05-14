@@ -49,6 +49,7 @@ public class SalaDescanso {
         lock.lock();
         try {
             descansoS.add(s);
+            imprimirColaDescansoSanitario();
             Thread.sleep((int) (Math.random() * ((8000 - 5000 + 1) + 5000)));
             descansoS.remove(0);
         } finally {
@@ -61,6 +62,7 @@ public class SalaDescanso {
         lock.lock();
         try {
             descansoA.add(a);
+            imprimirColaDescansoAuxiliar();
             Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
             descansoA.remove(0);
         } finally {
@@ -95,6 +97,15 @@ public class SalaDescanso {
         if (descansoA.isEmpty()){
             for (int i = 0; i< descansoA.size(); i++){
                 texto += descansoA.get(i).getIdentificador() + "";
+            }
+        }
+        colaDescansoTxt.setText(texto);
+    }
+       private synchronized void imprimirColaDescansoSanitario(){
+        String texto = "";
+        if (descansoS.isEmpty()){
+            for (int i = 0; i< descansoS.size(); i++){
+                texto += descansoS.get(i).getIdentificador() + "";
             }
         }
         colaDescansoTxt.setText(texto);

@@ -60,6 +60,7 @@ public class Recepcion {
         lock.lock();
         try {
             colaRecepcion.add(p);
+            colaRecepcion.get(0).setId(paciente.getIdentificador());
             imprimirColaEspera();
             
         } finally {
