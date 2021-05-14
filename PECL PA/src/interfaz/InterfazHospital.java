@@ -28,13 +28,22 @@ public class InterfazHospital extends javax.swing.JPanel {
         Recepcion recepcion = new Recepcion(jTextFieldColaEspera,jTextFieldPaciente,jTextFieldAuxiliarR);
         Hospital hospital = new Hospital(recepcion, salaDescanso, salaObservacion, salaVacunacion);
         Sanitario sanitario = new Sanitario(id, hospital);
-        Auxiliar auxiliar = new Auxiliar(id);
+        Auxiliar auxiliar = new Auxiliar(id, hospital);
         Paciente paciente = new Paciente(id, cita, hospital);
         
-       
         
+        for (int i = 0; i < 20; i++){
+            Sanitario s = new Sanitario (i, hospital);
+            s.start();
+        }
+        
+        for (int i = 0; i < 2; i++){
+            Auxiliar a = new Auxiliar(i, hospital);
+            a.start();
+        }
        
-
+        CreaPacientes p = new CreaPacientes(hospital);
+        p.start();
 //         Vestuario vestuario = new Vestuario(jTextField3,jTextField4,jTextField2);
 //        PiscinaOlas piscinaOlas = new PiscinaOlas(jTextField6,jTextField7,jTextField5);
 //        PiscinaNiños piscinaNiños = new PiscinaNiños(jTextField24, jTextField25,jTextField26,jTextField23);

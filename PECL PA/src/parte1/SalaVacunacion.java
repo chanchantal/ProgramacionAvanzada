@@ -39,16 +39,16 @@ public class SalaVacunacion {
     private final Semaphore pacienteEspera = new Semaphore(0, true);
     private final Semaphore sanitarioVacuna = new Semaphore(0, true);
 
-    private CyclicBarrier puesto1 = new CyclicBarrier(2);
-    private CyclicBarrier puesto2 = new CyclicBarrier(2);
-    private CyclicBarrier puesto3 = new CyclicBarrier(2);
-    private CyclicBarrier puesto4 = new CyclicBarrier(2);
-    private CyclicBarrier puesto5 = new CyclicBarrier(2);
-    private CyclicBarrier puesto6 = new CyclicBarrier(2);
-    private CyclicBarrier puesto7 = new CyclicBarrier(2);
-    private CyclicBarrier puesto8 = new CyclicBarrier(2);
-    private CyclicBarrier puesto9 = new CyclicBarrier(2);
-    private CyclicBarrier puesto10 = new CyclicBarrier(2);
+    private final CyclicBarrier puesto1 = new CyclicBarrier(2);
+    private final CyclicBarrier puesto2 = new CyclicBarrier(2);
+    private final CyclicBarrier puesto3 = new CyclicBarrier(2);
+    private final CyclicBarrier puesto4 = new CyclicBarrier(2);
+    private final CyclicBarrier puesto5 = new CyclicBarrier(2);
+    private final CyclicBarrier puesto6 = new CyclicBarrier(2);
+    private final CyclicBarrier puesto7 = new CyclicBarrier(2);
+    private final CyclicBarrier puesto8 = new CyclicBarrier(2);
+    private final CyclicBarrier puesto9 = new CyclicBarrier(2);
+    private final CyclicBarrier puesto10 = new CyclicBarrier(2);
 
     public SalaVacunacion(JTextField puesto1Txt, JTextField puesto2Txt, JTextField puesto3Txt, JTextField puesto4Txt, JTextField puesto5Txt, JTextField puesto6Txt, JTextField puesto7Txt, JTextField puesto8Txt, JTextField puesto9Txt, JTextField puesto10Txt) {
         arrayTxt = new ArrayList<>();

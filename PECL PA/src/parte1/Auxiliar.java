@@ -19,9 +19,10 @@ public class Auxiliar extends Thread {
     private Hospital hospital;
     private boolean cita;
     private Paciente paciente;
-    
-    public Auxiliar(int id) {
+
+    public Auxiliar(int id, Hospital hospital) {
         identificador = "A" + id;
+        this.hospital = hospital;
     }
 
     public String getIdentificador() {
@@ -35,16 +36,14 @@ public class Auxiliar extends Thread {
     @Override
     public void run() {
         try {
-            hospital.getRecepcion().auxiliarRegistra();
-            cita = true;
-            int comprobacion = (int) (Math.random() * (100 - 1 + 1) + 1);
-            if (comprobacion == 1) {
-                cita = false;
-            }else{
-                hospital.getRecepcion().salir(paciente);
+            if (identificador == "A1") {
+                hospital.getRecepcion().auxiliarRegistra();
+                hospital.getSalaDescanso().descansoAuxiliar1(this);
+
+            } else {
+                hospital.getSalaVacunacion().haciendoVacunas(this);
+                hospital.getSalaDescanso().descansoAuxiliar2(this);
             }
-            
-            
 
         } catch (InterruptedException ex) {
             Logger.getLogger(Auxiliar.class.getName()).log(Level.SEVERE, null, ex);
