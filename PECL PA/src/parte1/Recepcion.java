@@ -37,10 +37,12 @@ public class Recepcion {
 
 
 
-    public void auxiliarRegistra() throws InterruptedException {
+    public void auxiliarRegistra(Auxiliar a) throws InterruptedException {
         for (int i = 0; i < 10; i++) {
             auxiliarRegistra.acquire();
+            auxiliarTxt.setText(a.getIdentificador());
             Thread.sleep((int) (Math.random() * ((1000 - 500 + 1) + 500)));
+            
         }
     }
 

@@ -23,7 +23,7 @@ public class InterfazHospital extends javax.swing.JPanel {
         boolean cita = true;
         
         SalaDescanso salaDescanso = new SalaDescanso(jTextFieldSalaDescanso);
-        SalaVacunacion salaVacunacion = new SalaVacunacion( jTextFieldPuestoV1,jTextFieldPuestoV2,jTextFieldPuestoV3,jTextFieldPuestoV4,jTextFieldPuestoV5,jTextFieldPuestoV6,jTextFieldPuestoV7,jTextFieldPuestoV8,jTextFieldPuestoV9,jTextFieldPuestoV10);
+        SalaVacunacion salaVacunacion = new SalaVacunacion( jTextFieldPuestoV1,jTextFieldPuestoV2,jTextFieldPuestoV3,jTextFieldPuestoV4,jTextFieldPuestoV5,jTextFieldPuestoV6,jTextFieldPuestoV7,jTextFieldPuestoV8,jTextFieldPuestoV9,jTextFieldPuestoV10, jTextFieldauxiliarV);
         SalaObservacion salaObservacion = new SalaObservacion(jTextFieldPuestoO1,jTextFieldPuestoO2,jTextFieldPuestoO3,jTextFieldPuestoO4,jTextFieldPuestoO5,jTextFieldPuestoO6,jTextFieldPuestoO7,jTextFieldPuestoO8,jTextFieldPuestoO9,jTextFieldPuestoO10,jTextFieldPuestoO11,jTextFieldPuestoO12,jTextFieldPuestoO13,jTextFieldPuestoO14,jTextFieldPuestoO15,jTextFieldPuestoO16,jTextFieldPuestoO17,jTextFieldPuestoO18,jTextFieldPuestoO19,jTextFieldPuestoO20);
         Recepcion recepcion = new Recepcion(jTextFieldColaEspera,jTextFieldPaciente,jTextFieldAuxiliarR);
         Hospital hospital = new Hospital(recepcion, salaDescanso, salaObservacion, salaVacunacion);

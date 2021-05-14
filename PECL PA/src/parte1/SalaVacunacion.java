@@ -20,6 +20,7 @@ public class SalaVacunacion {
     private final  javax.swing.JTextField puesto8Txt;
     private final  javax.swing.JTextField puesto9Txt;
     private final  javax.swing.JTextField puesto10Txt;
+    private final javax.swing.JTextField auxiliarTxt;
     
     private  Paciente paciente;
     private  Sanitario sanitario;
@@ -50,7 +51,7 @@ public class SalaVacunacion {
     private final CyclicBarrier puesto9 = new CyclicBarrier(2);
     private final CyclicBarrier puesto10 = new CyclicBarrier(2);
 
-    public SalaVacunacion(JTextField puesto1Txt, JTextField puesto2Txt, JTextField puesto3Txt, JTextField puesto4Txt, JTextField puesto5Txt, JTextField puesto6Txt, JTextField puesto7Txt, JTextField puesto8Txt, JTextField puesto9Txt, JTextField puesto10Txt) {
+    public SalaVacunacion(JTextField puesto1Txt, JTextField puesto2Txt, JTextField puesto3Txt, JTextField puesto4Txt, JTextField puesto5Txt, JTextField puesto6Txt, JTextField puesto7Txt, JTextField puesto8Txt, JTextField puesto9Txt, JTextField puesto10Txt, JTextField auxiliarTxt) {
         arrayTxt = new ArrayList<>();
         arrayTxt.add(puesto1Txt);
         arrayTxt.add(puesto2Txt);
@@ -72,6 +73,7 @@ public class SalaVacunacion {
         this.puesto8Txt = puesto8Txt;
         this.puesto9Txt = puesto9Txt;
         this.puesto10Txt = puesto10Txt;
+        this.auxiliarTxt = auxiliarTxt;
 
    }
 
@@ -114,6 +116,7 @@ public class SalaVacunacion {
         
         for (int i = 0; i < 20; i++) {
             colaVacunas.add(i);
+            auxiliarTxt.setText(a.getIdentificador());
             Thread.sleep((int) (Math.random() * ((1000 - 500 + 1) + 500)));
             vacuna.signalAll();
         }
@@ -132,6 +135,7 @@ public class SalaVacunacion {
                 } while (puestoSanitario.get(eleccion) != null);
                 puestoSanitario.add(eleccion, s);
                 puesto(eleccion);
+                colaVacunas.remove(0);
 
             } catch (InterruptedException e) {
             } finally {

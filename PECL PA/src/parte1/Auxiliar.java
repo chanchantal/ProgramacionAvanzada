@@ -36,11 +36,11 @@ public class Auxiliar extends Thread {
     @Override
     public void run() {
         try {
-            if (identificador == "A1") {
-                hospital.getRecepcion().auxiliarRegistra();
+            if ("A1".equals(identificador)) {  //Este es el run de recepcion
+                hospital.getRecepcion().auxiliarRegistra(this);
                 hospital.getSalaDescanso().descansoAuxiliar1(this);
 
-            } else {
+            } else { //este es el run de vacunas para A2
                 hospital.getSalaVacunacion().haciendoVacunas(this);
                 hospital.getSalaDescanso().descansoAuxiliar2(this);
             }
