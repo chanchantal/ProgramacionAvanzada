@@ -148,63 +148,63 @@ public class SalaVacunacion {
     public void puesto(int eleccion) throws InterruptedException, BrokenBarrierException {
         switch (eleccion) {
             case 0:
-                puesto1Txt.setText(paciente.getIdentificador()+ sanitario.getIdentificador());
+                puesto1Txt.setText(paciente.getIdentificador()+" "+ sanitario.getIdentificador());
                 // jtextfield del puesto 0 y le hago un setText del id del paciente y del sanitario
                 puesto1.await();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
                 puesto1Txt.getText().isEmpty();
                 break;
             case 1:
-                puesto2Txt.setText(paciente.getIdentificador()+ sanitario.getIdentificador());
+                puesto2Txt.setText(paciente.getIdentificador()+" "+ sanitario.getIdentificador());
                 puesto2.await();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
                 puesto2Txt.getText().isEmpty();
                 break;
 
             case 2:
-                puesto3Txt.setText(paciente.getIdentificador()+ sanitario.getIdentificador());
+                puesto3Txt.setText(paciente.getIdentificador()+ " "+sanitario.getIdentificador());
                 puesto3.await();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
                 puesto3Txt.getText().isEmpty();
                 break;
             case 3:
-                puesto4Txt.setText(paciente.getIdentificador()+ sanitario.getIdentificador());
+                puesto4Txt.setText(paciente.getIdentificador()+" "+ sanitario.getIdentificador());
                 puesto4.await();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
                 puesto4Txt.getText().isEmpty();
                 break;
             case 4:
-                puesto5Txt.setText(paciente.getIdentificador()+ sanitario.getIdentificador());
+                puesto5Txt.setText(paciente.getIdentificador()+" "+ sanitario.getIdentificador());
                 puesto5.await();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
                 puesto5Txt.getText().isEmpty();
                 break;
             case 5:
-                puesto6Txt.setText(paciente.getIdentificador()+ sanitario.getIdentificador());
+                puesto6Txt.setText(paciente.getIdentificador()+ " "+sanitario.getIdentificador());
                 puesto6.await();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
                 puesto6Txt.getText().isEmpty();
                 break;
             case 6:
-                puesto7Txt.setText(paciente.getIdentificador()+ sanitario.getIdentificador());
+                puesto7Txt.setText(paciente.getIdentificador()+" "+ sanitario.getIdentificador());
                 puesto7.await();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
                 puesto7Txt.getText().isEmpty();
                 break;
             case 7:
-                puesto8Txt.setText(paciente.getIdentificador()+ sanitario.getIdentificador());
+                puesto8Txt.setText(paciente.getIdentificador()+" "+ sanitario.getIdentificador());
                 puesto8.await();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
                 puesto8Txt.getText().isEmpty();
                 break;
             case 8:
-                puesto9Txt.setText(paciente.getIdentificador()+ sanitario.getIdentificador());
+                puesto9Txt.setText(paciente.getIdentificador()+" "+ sanitario.getIdentificador());
                 puesto9.await();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
                 puesto9Txt.getText().isEmpty();
                 break;
             case 9:
-                puesto10Txt.setText(paciente.getIdentificador()+ sanitario.getIdentificador());
+                puesto10Txt.setText(paciente.getIdentificador()+" "+ sanitario.getIdentificador());
                 puesto10.await();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
                 puesto10Txt.getText().isEmpty();

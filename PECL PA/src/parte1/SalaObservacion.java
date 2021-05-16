@@ -2,6 +2,7 @@ package parte1;
 
 import java.util.ArrayList;
 import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -30,6 +31,9 @@ public class SalaObservacion {
     private final  javax.swing.JTextField puesto19Txt;
     private final  javax.swing.JTextField puesto20Txt;
     
+    public Paciente paciente;
+    public Sanitario sanitario;
+    
     private boolean reaccion;
     private final Lock lock = new ReentrantLock();
     private final Lock lockP = new ReentrantLock();
@@ -44,6 +48,7 @@ public class SalaObservacion {
     private final Semaphore pacienteReacciona = new Semaphore(0);
 
     private final Condition esperar = lock.newCondition();
+
 
     public SalaObservacion(JTextField puesto1Txt, JTextField puesto2Txt, JTextField puesto3Txt, JTextField puesto4Txt, JTextField puesto5Txt, JTextField puesto6Txt, JTextField puesto7Txt, JTextField puesto8Txt, JTextField puesto9Txt, JTextField puesto10Txt, JTextField puesto11Txt, JTextField puesto12Txt, JTextField puesto13Txt, JTextField puesto14Txt, JTextField puesto15Txt, JTextField puesto16Txt, JTextField puesto17Txt, JTextField puesto18Txt, JTextField puesto19Txt, JTextField puesto20Txt) {
         arrayTxt = new ArrayList<>();
@@ -99,6 +104,10 @@ public class SalaObservacion {
                 esperar.await();
             }
             reposar.add(p);
+            for (int i = 0; i <20; i++){
+                arrayTxt.get(i).setText(paciente.getIdentificador());//Añado el paciente en los JtextField
+            }
+            
             Thread.sleep(10000);
             reaccion(p);
         } catch (InterruptedException e) {
@@ -134,6 +143,7 @@ public class SalaObservacion {
 
         if (probabilidad < 5 && probabilidad > 0) {
             reaccion = true;
+            arrayTxt.get(probabilidad).setText(sanitario.getIdentificador());
             sanitarioObserva.release();
             System.out.println("El paciente está sufriendo una reacción a la vacuna");
             pacienteReacciona.acquire();
@@ -148,6 +158,11 @@ public class SalaObservacion {
     public void setReaccion(boolean reaccion) {
         this.reaccion = reaccion;
     }
+   
 
-
+    
+    
 }
+
+
+
