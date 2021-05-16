@@ -37,7 +37,7 @@ public class SalaDescanso {
                 esperar.await();
             }
             do {
-                eleccion = (int) (Math.random() * 10);
+                eleccion = (int) (Math.random() * 10+1);
             } while (vacunar.get(eleccion) != null);
             vacunar.add(eleccion, s);
         } finally {

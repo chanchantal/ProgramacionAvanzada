@@ -87,7 +87,7 @@ public class SalaVacunacion {
                 esperaP.await();
             }
             do {
-                eleccion = (int) (Math.random() * 10);
+                eleccion = (int) (Math.random() * 10+1);
             } while (puestoPaciente.get(eleccion) != null);
             puestoPaciente.add(eleccion, p);
             arrayTxt.get(eleccion).setText(paciente.getIdentificador());
@@ -131,11 +131,11 @@ public class SalaVacunacion {
                     esperaS.await();
                 }
                 do {
-                    eleccion = (int) (Math.random() * 10);
+                    eleccion = (int) (Math.random() * 10+1);
                 } while (puestoSanitario.get(eleccion) != null);
                 puestoSanitario.add(eleccion, s);
                 puesto(eleccion);
-                colaVacunas.remove(0);
+                colaVacunas.remove(1);
 
             } catch (InterruptedException e) {
             } finally {
