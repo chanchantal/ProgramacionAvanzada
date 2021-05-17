@@ -60,12 +60,15 @@ public class Paciente extends Thread {
             hospital.getRecepcion().pacienteEspera();
             if (cita == true) {
                 hospital.getRecepcion().salir(this);
-
+            
                 hospital.getSalaVacunacion().entrar(this);
                 hospital.getSalaVacunacion().salir(this);
 
                 hospital.getSalaObservacion().entrar(this);
+                hospital.getSalaObservacion().estaReposando(this);
                 hospital.getSalaObservacion().salir(this);
+            }else{
+                hospital.getRecepcion().salir(this);
             }
         } catch (InterruptedException | BrokenBarrierException ex) {
             Logger.getLogger(Paciente.class.getName()).log(Level.SEVERE, null, ex);

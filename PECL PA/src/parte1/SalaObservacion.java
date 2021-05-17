@@ -10,26 +10,27 @@ import java.util.concurrent.locks.ReentrantLock;
 import javax.swing.JTextField;
 
 public class SalaObservacion {
-    private final  javax.swing.JTextField puesto1Txt;
-    private final  javax.swing.JTextField puesto2Txt;
-    private final  javax.swing.JTextField puesto3Txt;
-    private final  javax.swing.JTextField puesto4Txt;
-    private final  javax.swing.JTextField puesto5Txt;
-    private final  javax.swing.JTextField puesto6Txt;
-    private final  javax.swing.JTextField puesto7Txt;
-    private final  javax.swing.JTextField puesto8Txt;
-    private final  javax.swing.JTextField puesto9Txt;
-    private final  javax.swing.JTextField puesto10Txt;
-    private final  javax.swing.JTextField puesto11Txt;
-    private final  javax.swing.JTextField puesto12Txt;
-    private final  javax.swing.JTextField puesto13Txt;
-    private final  javax.swing.JTextField puesto14Txt;
-    private final  javax.swing.JTextField puesto15Txt;
-    private final  javax.swing.JTextField puesto16Txt;
-    private final  javax.swing.JTextField puesto17Txt;
-    private final  javax.swing.JTextField puesto18Txt;
-    private final  javax.swing.JTextField puesto19Txt;
-    private final  javax.swing.JTextField puesto20Txt;
+    
+    private final javax.swing.JTextField puesto1Txt;
+    private final javax.swing.JTextField puesto2Txt;
+    private final javax.swing.JTextField puesto3Txt;
+    private final javax.swing.JTextField puesto4Txt;
+    private final javax.swing.JTextField puesto5Txt;
+    private final javax.swing.JTextField puesto6Txt;
+    private final javax.swing.JTextField puesto7Txt;
+    private final javax.swing.JTextField puesto8Txt;
+    private final javax.swing.JTextField puesto9Txt;
+    private final javax.swing.JTextField puesto10Txt;
+    private final javax.swing.JTextField puesto11Txt;
+    private final javax.swing.JTextField puesto12Txt;
+    private final javax.swing.JTextField puesto13Txt;
+    private final javax.swing.JTextField puesto14Txt;
+    private final javax.swing.JTextField puesto15Txt;
+    private final javax.swing.JTextField puesto16Txt;
+    private final javax.swing.JTextField puesto17Txt;
+    private final javax.swing.JTextField puesto18Txt;
+    private final javax.swing.JTextField puesto19Txt;
+    private final javax.swing.JTextField puesto20Txt;
     
     public Paciente paciente;
     public Sanitario sanitario;
@@ -38,18 +39,17 @@ public class SalaObservacion {
     private final Lock lock = new ReentrantLock();
     private final Lock lockP = new ReentrantLock();
     private final Lock lockS = new ReentrantLock();
-
+    
     private final ArrayList<Paciente> reposar = new ArrayList<>();
     private final ArrayList<Paciente> colaPaciente = new ArrayList<Paciente>();
     private final ArrayList<Sanitario> colaSanitario = new ArrayList<>();
     private ArrayList<JTextField> arrayTxt = new ArrayList<>();
-
+    
     private final Semaphore sanitarioObserva = new Semaphore(0);
     private final Semaphore pacienteReacciona = new Semaphore(0);
-
+    
     private final Condition esperar = lock.newCondition();
-
-
+    
     public SalaObservacion(JTextField puesto1Txt, JTextField puesto2Txt, JTextField puesto3Txt, JTextField puesto4Txt, JTextField puesto5Txt, JTextField puesto6Txt, JTextField puesto7Txt, JTextField puesto8Txt, JTextField puesto9Txt, JTextField puesto10Txt, JTextField puesto11Txt, JTextField puesto12Txt, JTextField puesto13Txt, JTextField puesto14Txt, JTextField puesto15Txt, JTextField puesto16Txt, JTextField puesto17Txt, JTextField puesto18Txt, JTextField puesto19Txt, JTextField puesto20Txt) {
         arrayTxt = new ArrayList<>();
         arrayTxt.add(puesto1Txt);
@@ -94,9 +94,7 @@ public class SalaObservacion {
         this.puesto20Txt = puesto20Txt;
         this.reaccion = false;
     }
-
-
-
+    
     public void entrar(Paciente p) throws BrokenBarrierException {
         lock.lock();
         try {
@@ -104,43 +102,47 @@ public class SalaObservacion {
                 esperar.await();
             }
             reposar.add(p);
-            for (int i = 0; i <20; i++){
-                arrayTxt.get(i).setText(paciente.getIdentificador());//Añado el paciente en los JtextField
-            }
+            System.out.println("holaa");
+            arrayTxt.get(reposar.indexOf(p)).setText(p.getIdentificador());//Añado el paciente en los JtextField
             
-            Thread.sleep(10000);
-            reaccion(p);
+            
+            
         } catch (InterruptedException e) {
         } finally {
             lock.unlock();
         }
     }
-
+    
+    public void estaReposando(Paciente p) throws InterruptedException{
+        Thread.sleep(10000);
+        reaccion(p);
+    }
+    
     public void salir(Paciente p) throws InterruptedException {
         lock.lock();
         try {
             reposar.remove(p);
-
+            
             esperar.signalAll();
         } finally {
             lock.unlock();
         }
-
+        
     }
-
+    
     public void sanitarioObserva(Sanitario s) throws InterruptedException {
         sanitarioObserva.acquire();
-
+        
         System.out.println("El sanitario esta atendiendo al paciente");
         Thread.sleep((int) (Math.random() * (5000 - 2000 + 1) + 2000));
         pacienteReacciona.release();
-
+        
     }
-
+    
     public void reaccion(Paciente p) throws InterruptedException {
-
+        
         int probabilidad = (int) ((Math.random() * (100 - 1 + 1) + 1));
-
+        
         if (probabilidad < 5 && probabilidad > 0) {
             reaccion = true;
             arrayTxt.get(probabilidad).setText(sanitario.getIdentificador());
@@ -150,19 +152,13 @@ public class SalaObservacion {
             reaccion = false;
         }
     }
-
+    
     public boolean isReaccion() {
         return reaccion;
     }
-
+    
     public void setReaccion(boolean reaccion) {
         this.reaccion = reaccion;
     }
-   
-
-    
     
 }
-
-
-

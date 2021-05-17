@@ -39,7 +39,9 @@ public class Auxiliar extends Thread {
             while (true) {
                 if ("A1".equals(identificador)) {
                     //Este es el run de recepcion
+                  
                     hospital.getRecepcion().auxiliarRegistra(this);
+                    
                     hospital.getSalaDescanso().descansoAuxiliar1(this);
 
                 } else {

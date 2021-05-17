@@ -42,9 +42,9 @@ public class Recepcion {
             auxiliarRegistra.acquire();
             auxiliarTxt.setText(a.getIdentificador());
             Thread.sleep((int) (Math.random() * ((1000 - 500 + 1) + 500)));
-            
+            pacienteEspera.release();
         }
-        pacienteEspera.release();
+        
         auxiliarTxt.setText("");
     }
 
@@ -74,7 +74,7 @@ public class Recepcion {
         try {
             colaRecepcion.remove(p);
             recepcion.signalAll();
-            
+            imprimirColaEspera();
             paraVacunar.add(p);
         } finally {
             lock.unlock();
