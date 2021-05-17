@@ -13,7 +13,7 @@ public class CreaPacientes extends Thread{
     }
     
     public void run(){
-        for (int i = 0; i < 2000 ; i++){
+        for (int i = 1; i < 2001 ; i++){
             try {
                 boolean cita = true;
                 int comprobacion = (int) (Math.random() * (100 - 1 + 1) + 1);
@@ -21,6 +21,7 @@ public class CreaPacientes extends Thread{
                     cita = false;
                 }
                 Paciente p = new Paciente(i, cita, hospital);
+                p.start();
                 Thread.sleep((int) (Math.random() * ((3000 - 1000 + 1) + 1000)));
             } catch (InterruptedException ex) {
                 Logger.getLogger(CreaPacientes.class.getName()).log(Level.SEVERE, null, ex);

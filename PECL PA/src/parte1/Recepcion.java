@@ -60,7 +60,6 @@ public class Recepcion {
         lock.lock();
         try {
             colaRecepcion.add(p);
-            colaRecepcion.get(0).setId(paciente.getIdentificador());
             imprimirColaEspera();
             
         } finally {
@@ -81,9 +80,9 @@ public class Recepcion {
     }
     private synchronized void imprimirColaEspera(){
         String texto = "";
-        if (colaRecepcion.isEmpty()){
+        if (!colaRecepcion.isEmpty()){
             for (int i = 0; i< colaRecepcion.size(); i++){
-                texto += colaRecepcion.get(i).getIdentificador() + "";
+                texto += colaRecepcion.get(i).getIdentificador() + " ";
             }
         }
         colaEsperaTxt.setText(texto);

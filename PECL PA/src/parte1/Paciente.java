@@ -55,6 +55,7 @@ public class Paciente extends Thread {
     @Override
     public void run() {
         try {
+            
             hospital.getRecepcion().pacienteEntra(this);
             hospital.getRecepcion().pacienteEspera();
             if (cita == true) {

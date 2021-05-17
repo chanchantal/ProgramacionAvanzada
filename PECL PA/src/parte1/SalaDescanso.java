@@ -15,7 +15,7 @@ public class SalaDescanso {
     private final Condition esperar = lock.newCondition();
     private final Condition vacuna = lock.newCondition();
 
-    private final ArrayList<Sanitario> vacunar = new ArrayList<>();
+    private final ArrayList<Sanitario> vacunar;
     private final ArrayList<Auxiliar> descansoA = new ArrayList<>();
     private final ArrayList<Sanitario> descansoS = new ArrayList<>();
     
@@ -23,6 +23,7 @@ public class SalaDescanso {
 
     public SalaDescanso(JTextField colaDescansoTxt) {
         this.colaDescansoTxt = colaDescansoTxt;
+        vacunar  = new ArrayList<>(10);
     }
 
     
@@ -37,8 +38,9 @@ public class SalaDescanso {
                 esperar.await();
             }
             do {
-                eleccion = (int) (Math.random() * 10+1);
-            } while (vacunar.get(eleccion) != null);
+                eleccion = (int) (Math.random() * 9+1);
+                
+            } while (vacunar.isEmpty() || vacunar.get(eleccion) != null);
             vacunar.add(eleccion, s);
         } finally {
             lockVestidor.unlock();
@@ -85,18 +87,18 @@ public class SalaDescanso {
     // Para poner los auxiliares y los sanitarios en un mismo jtextfield
         private synchronized void imprimirColaDescansoSanitarios(){
         String texto = "";
-        if (descansoS.isEmpty()){
+        if (!descansoS.isEmpty()){
             for (int i = 0; i< descansoS.size(); i++){
-                texto += descansoS.get(i).getIdentificador() + "";
+                texto += descansoS.get(i).getIdentificador() + " ";
             }
         }
         colaDescansoTxt.setText(texto);
     }
        private synchronized void imprimirColaDescansoAuxiliar(){
         String texto = "";
-        if (descansoA.isEmpty()){
+        if (!descansoA.isEmpty()){
             for (int i = 0; i< descansoA.size(); i++){
-                texto += descansoA.get(i).getIdentificador() + "";
+                texto += descansoA.get(i).getIdentificador() + " ";
             }
         }
         colaDescansoTxt.setText(texto);

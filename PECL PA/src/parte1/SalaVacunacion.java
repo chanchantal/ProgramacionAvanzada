@@ -118,7 +118,7 @@ public class SalaVacunacion {
             colaVacunas.add(i);
             auxiliarTxt.setText(a.getIdentificador());
             Thread.sleep((int) (Math.random() * ((1000 - 500 + 1) + 500)));
-            vacuna.signalAll();
+            
         }
     }
 

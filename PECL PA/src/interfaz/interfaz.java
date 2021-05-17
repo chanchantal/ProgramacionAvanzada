@@ -6,69 +6,38 @@
 package interfaz;
 
 import parte1.*;
-import parte1.Hospital;
 
 /**
  *
- * @author ctati
+ * @author Usuario
  */
-public class InterfazHospital extends javax.swing.JPanel {
+public class interfaz extends javax.swing.JFrame {
 
     /**
-     * Creates new form Hospital
+     * Creates new form interfaz
      */
-    public InterfazHospital() {
+    public interfaz() {
         initComponents();
-        int id = 0;
-        boolean cita = true;
-        
+
         SalaDescanso salaDescanso = new SalaDescanso(jTextFieldSalaDescanso);
-        SalaVacunacion salaVacunacion = new SalaVacunacion( jTextFieldPuestoV1,jTextFieldPuestoV2,jTextFieldPuestoV3,jTextFieldPuestoV4,jTextFieldPuestoV5,jTextFieldPuestoV6,jTextFieldPuestoV7,jTextFieldPuestoV8,jTextFieldPuestoV9,jTextFieldPuestoV10, jTextFieldauxiliarV);
-        SalaObservacion salaObservacion = new SalaObservacion(jTextFieldPuestoO1,jTextFieldPuestoO2,jTextFieldPuestoO3,jTextFieldPuestoO4,jTextFieldPuestoO5,jTextFieldPuestoO6,jTextFieldPuestoO7,jTextFieldPuestoO8,jTextFieldPuestoO9,jTextFieldPuestoO10,jTextFieldPuestoO11,jTextFieldPuestoO12,jTextFieldPuestoO13,jTextFieldPuestoO14,jTextFieldPuestoO15,jTextFieldPuestoO16,jTextFieldPuestoO17,jTextFieldPuestoO18,jTextFieldPuestoO19,jTextFieldPuestoO20);
-        Recepcion recepcion = new Recepcion(jTextFieldColaEspera,jTextFieldPaciente,jTextFieldAuxiliarR);
+        SalaVacunacion salaVacunacion = new SalaVacunacion(jTextFieldPuestoV1, jTextFieldPuestoV2, jTextFieldPuestoV3, jTextFieldPuestoV4, jTextFieldPuestoV5, jTextFieldPuestoV6, jTextFieldPuestoV7, jTextFieldPuestoV8, jTextFieldPuestoV9, jTextFieldPuestoV10, jTextFieldauxiliarV);
+        SalaObservacion salaObservacion = new SalaObservacion(jTextFieldPuestoO1, jTextFieldPuestoO2, jTextFieldPuestoO3, jTextFieldPuestoO4, jTextFieldPuestoO5, jTextFieldPuestoO6, jTextFieldPuestoO7, jTextFieldPuestoO8, jTextFieldPuestoO9, jTextFieldPuestoO10, jTextFieldPuestoO11, jTextFieldPuestoO12, jTextFieldPuestoO13, jTextFieldPuestoO14, jTextFieldPuestoO15, jTextFieldPuestoO16, jTextFieldPuestoO17, jTextFieldPuestoO18, jTextFieldPuestoO19, jTextFieldPuestoO20);
+        Recepcion recepcion = new Recepcion(jTextFieldColaEspera, jTextFieldPaciente, jTextFieldAuxiliarR);
         Hospital hospital = new Hospital(recepcion, salaDescanso, salaObservacion, salaVacunacion);
-        Sanitario sanitario = new Sanitario(id, hospital);
-        Auxiliar auxiliar = new Auxiliar(id, hospital);
-        Paciente paciente = new Paciente(id, cita, hospital);
-        
-        
-        for (int i = 0; i < 20; i++){
-            Sanitario s = new Sanitario (i, hospital);
+
+
+        for (int i = 1; i < 21; i++) {
+            Sanitario s = new Sanitario(i, hospital);
             s.start();
         }
-        
-        for (int i = 0; i < 2; i++){
+
+        for (int i = 1; i < 3; i++) {
             Auxiliar a = new Auxiliar(i, hospital);
             a.start();
         }
-       
+
         CreaPacientes p = new CreaPacientes(hospital);
         p.start();
-//         Vestuario vestuario = new Vestuario(jTextField3,jTextField4,jTextField2);
-//        PiscinaOlas piscinaOlas = new PiscinaOlas(jTextField6,jTextField7,jTextField5);
-//        PiscinaNiños piscinaNiños = new PiscinaNiños(jTextField24, jTextField25,jTextField26,jTextField23);
-//        Tumbonas tumbonas = new Tumbonas(jTextField18,jTextField19,jTextField17);
-//        PiscinaGrande piscinaGrande = new PiscinaGrande(jTextField21, jTextField22);
-//        Tobogan toboganA = new Tobogan(piscinaGrande,jTextField28, jTextField29,jTextField27);
-//        Tobogan toboganB = new Tobogan(piscinaGrande,jTextField31, jTextField32,jTextField30);
-//        Tobogan toboganC = new Tobogan(piscinaGrande,jTextField34, jTextField35, jTextField33);
-//        Parque p = new Parque(vestuario,piscinaOlas, piscinaGrande, piscinaNiños, tumbonas, toboganA, toboganB, toboganC, jTextField1);
-//        this.parque = p;
-//        piscinaGrande.setToboganA(toboganA);
-//        piscinaGrande.setToboganB(toboganB);
-//        piscinaGrande.setToboganC(toboganC);
-//        
-//        for(int i = 1 ; i<8;i++){
-//            int edad = (int)(Math.random()*33+18);
-//            Monitor m = new Monitor(edad, i, p, i);
-//            m.start();
-//        }
-//        Servidor s = new Servidor(parque);
-//        s.start();
-//        
-//        GeneradorUsers g = new GeneradorUsers(p);
-//        g.start();
-//    }
     }
 
     /**
@@ -80,6 +49,7 @@ public class InterfazHospital extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         recepcion = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -159,6 +129,8 @@ public class InterfazHospital extends javax.swing.JPanel {
         jTextFieldPuestoO18 = new javax.swing.JTextField();
         jTextFieldPuestoO19 = new javax.swing.JTextField();
         jTextFieldPuestoO20 = new javax.swing.JTextField();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText(" RECEPCIÓN");
 
@@ -685,21 +657,21 @@ public class InterfazHospital extends javax.swing.JPanel {
                 .addGap(80, 80, 80))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(recepcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55)
                 .addComponent(jPanelSalaDescanso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanelSalaVacunacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanelSalaObservacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanelSalaDescanso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(recepcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -707,6 +679,29 @@ public class InterfazHospital extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelSalaObservacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 865, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 601, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextFieldColaEsperaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldColaEsperaActionPerformed
@@ -777,10 +772,33 @@ public class InterfazHospital extends javax.swing.JPanel {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfazHospital().setVisible(true);
+                new interfaz().setVisible(true);
             }
         });
     }
@@ -825,6 +843,7 @@ public class InterfazHospital extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelSalaDescanso;
     private javax.swing.JPanel jPanelSalaObservacion;
     private javax.swing.JPanel jPanelSalaVacunacion;
