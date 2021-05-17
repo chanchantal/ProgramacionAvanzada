@@ -46,11 +46,13 @@ public class Sanitario extends Thread {
     public void run() {
         try {
             hospital.getSalaDescanso().vestidorSanitario(this);
+            System.out.println("se vistió");
             while (true) {
 
                 if (hospital.getSalaObservacion().isReaccion() == true) {
                     hospital.getSalaObservacion().sanitarioObserva(this);
                 }
+                
                 hospital.getSalaVacunacion().sanitarioVacuna(this);
                 hospital.getSalaDescanso().descansoSanitario(this);
             }
