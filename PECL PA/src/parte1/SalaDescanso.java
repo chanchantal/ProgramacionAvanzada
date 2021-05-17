@@ -7,8 +7,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import javax.swing.JTextField;
 
 public class SalaDescanso {
-
-
+    private Sanitario sanitario;
+    
     private final Lock lock = new ReentrantLock();
     private final Lock lockVestidor = new ReentrantLock();
 
@@ -20,6 +20,8 @@ public class SalaDescanso {
     private final ArrayList<Sanitario> descansoS = new ArrayList<>();
     
     private final javax.swing.JTextField colaDescansoTxt;
+    
+    String texto1 , texto2 = "";
 
     public SalaDescanso(JTextField colaDescansoTxt) {
         this.colaDescansoTxt = colaDescansoTxt;
@@ -31,16 +33,12 @@ public class SalaDescanso {
         int eleccion;
         lockVestidor.lock();
         try {
+            descansoS.add(s);
             imprimirColaDescansoSanitario();
+            
             Thread.sleep((int) (Math.random() * ((3000 - 1000 + 1) + 3000)));
-            while (vacunar.size() > 10) {
-                esperar.await();
-            }
-            do {
-                eleccion = (int) (Math.random() * 9+1);
-                
-            } while (vacunar.isEmpty() || vacunar.get(eleccion) != null);
-            vacunar.add(eleccion, s);
+            descansoS.remove(s);
+            imprimirColaDescansoSanitario();
         } finally {
             lockVestidor.unlock();
         }
@@ -52,7 +50,8 @@ public class SalaDescanso {
             descansoS.add(s);
             imprimirColaDescansoSanitario();
             Thread.sleep((int) (Math.random() * ((8000 - 5000 + 1) + 5000)));
-            descansoS.remove(0);
+            colaDescansoTxt.setText("");
+            descansoS.remove(s);
         } finally {
             lock.unlock();
         }
@@ -78,6 +77,7 @@ public class SalaDescanso {
         try {
             descansoA.add(a);
             Thread.sleep((int) (Math.random() * ((4000 - 1000 + 1) + 1000)));
+            colaDescansoTxt.setText("");
             descansoA.remove(a);
         } finally {
             lock.unlock();
@@ -88,22 +88,22 @@ public class SalaDescanso {
     // Para poner los auxiliares y los sanitarios en un mismo jtextfield
     
        private synchronized void imprimirColaDescansoAuxiliar(){
-        String texto = "";
+        String texto1 = "";
         if (!descansoA.isEmpty()){
             for (int i = 0; i< descansoA.size(); i++){
-                texto += descansoA.get(i).getIdentificador() + " ";
+                texto1 += descansoA.get(i).getIdentificador() + " ";
             }
         }
-        colaDescansoTxt.setText(texto);
+        colaDescansoTxt.setText(texto1 + texto2);
     }
        private synchronized void imprimirColaDescansoSanitario(){
-        String texto = "";
+     
         if (!descansoS.isEmpty()){
             for (int i = 0; i< descansoS.size(); i++){
-                texto += descansoS.get(i).getIdentificador() + "";
+                texto2 += descansoS.get(i).getIdentificador() + " ";
             }
         }
-        colaDescansoTxt.setText(texto);
+        colaDescansoTxt.setText(texto1+texto2);
     }
 
 }

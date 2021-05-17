@@ -63,7 +63,7 @@ public class Recepcion {
         try {
             colaRecepcion.add(p);
             imprimirColaEspera();
-            
+            pacienteTxt.setText(p.getIdentificador());
         } finally {
             lock.unlock();
         }

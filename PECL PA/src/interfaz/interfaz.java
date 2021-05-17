@@ -28,6 +28,7 @@ public class interfaz extends javax.swing.JFrame {
 
         for (int i = 1; i < 21; i++) {
             Sanitario s = new Sanitario(i, hospital);
+           
             s.start();
         }
 
