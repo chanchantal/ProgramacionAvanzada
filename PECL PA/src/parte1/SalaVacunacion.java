@@ -80,19 +80,19 @@ public class SalaVacunacion {
     public void entrar(Paciente p) throws BrokenBarrierException { //entra el paciente a vacunarse
         int eleccion;
         lock.lock();
-        System.out.println("El paciente entra a la sala de vacunación");
-
+        
         try {
             while (puestoPaciente.size() > 10) {
                 esperaP.await();
             }
             do {
-                eleccion = (int) (Math.random() * 10+1);
-            } while (puestoPaciente.get(eleccion) != null);
+                eleccion = (int) (Math.random() * 9+1);
+            } while (puestoPaciente.isEmpty() || puestoPaciente.get(eleccion) != null);
             puestoPaciente.add(eleccion, p);
+            puesto(eleccion);
             arrayTxt.get(eleccion).setText(paciente.getIdentificador());
             arrayTxt.get(eleccion).setText(sanitario.getIdentificador());
-            puesto(eleccion);
+            
             
 
         } catch (InterruptedException e) {
@@ -106,7 +106,6 @@ public class SalaVacunacion {
         try {
             puestoPaciente.remove(p);
             esperaP.signalAll();
-            System.out.println("El paciente ha recibido la vacuna y va a sala de observación");
         } finally {
             lock.unlock();
         }

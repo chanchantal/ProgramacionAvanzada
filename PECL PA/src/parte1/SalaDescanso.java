@@ -27,12 +27,11 @@ public class SalaDescanso {
     }
 
     
-   
-
     public void vestidorSanitario(Sanitario s) throws InterruptedException {
         int eleccion;
         lockVestidor.lock();
         try {
+            imprimirColaDescansoSanitario();
             Thread.sleep((int) (Math.random() * ((3000 - 1000 + 1) + 3000)));
             while (vacunar.size() > 10) {
                 esperar.await();
@@ -63,10 +62,12 @@ public class SalaDescanso {
     public void descansoAuxiliar1(Auxiliar a) throws InterruptedException {
         lock.lock();
         try {
+            
             descansoA.add(a);
             imprimirColaDescansoAuxiliar();
             Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-            descansoA.remove(0);
+            colaDescansoTxt.setText("");
+            descansoA.remove(a);
         } finally {
             lock.unlock();
         }
@@ -77,7 +78,7 @@ public class SalaDescanso {
         try {
             descansoA.add(a);
             Thread.sleep((int) (Math.random() * ((4000 - 1000 + 1) + 1000)));
-            descansoA.remove(0);
+            descansoA.remove(a);
         } finally {
             lock.unlock();
         }
@@ -85,15 +86,7 @@ public class SalaDescanso {
     
     
     // Para poner los auxiliares y los sanitarios en un mismo jtextfield
-        private synchronized void imprimirColaDescansoSanitarios(){
-        String texto = "";
-        if (!descansoS.isEmpty()){
-            for (int i = 0; i< descansoS.size(); i++){
-                texto += descansoS.get(i).getIdentificador() + " ";
-            }
-        }
-        colaDescansoTxt.setText(texto);
-    }
+    
        private synchronized void imprimirColaDescansoAuxiliar(){
         String texto = "";
         if (!descansoA.isEmpty()){
@@ -105,7 +98,7 @@ public class SalaDescanso {
     }
        private synchronized void imprimirColaDescansoSanitario(){
         String texto = "";
-        if (descansoS.isEmpty()){
+        if (!descansoS.isEmpty()){
             for (int i = 0; i< descansoS.size(); i++){
                 texto += descansoS.get(i).getIdentificador() + "";
             }

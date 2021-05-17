@@ -44,6 +44,8 @@ public class Recepcion {
             Thread.sleep((int) (Math.random() * ((1000 - 500 + 1) + 500)));
             
         }
+        pacienteEspera.release();
+        auxiliarTxt.setText("");
     }
 
     public void pacienteEspera() {
@@ -72,7 +74,7 @@ public class Recepcion {
         try {
             colaRecepcion.remove(p);
             recepcion.signalAll();
-            System.out.println("El paciente se va a la sala de Vacunación");
+            
             paraVacunar.add(p);
         } finally {
             lock.unlock();

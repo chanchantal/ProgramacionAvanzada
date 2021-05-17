@@ -36,15 +36,19 @@ public class Auxiliar extends Thread {
     @Override
     public void run() {
         try {
-            if ("A1".equals(identificador)) {  //Este es el run de recepcion
-                hospital.getRecepcion().auxiliarRegistra(this);
-                hospital.getSalaDescanso().descansoAuxiliar1(this);
+            while (true) {
+                if ("A1".equals(identificador)) {
+                    //Este es el run de recepcion
+                    hospital.getRecepcion().auxiliarRegistra(this);
+                    hospital.getSalaDescanso().descansoAuxiliar1(this);
 
-            } else { //este es el run de vacunas para A2
-                hospital.getSalaVacunacion().haciendoVacunas(this);
-                hospital.getSalaDescanso().descansoAuxiliar2(this);
+                } else {
+                    //este es el run de vacunas para A2
+                    hospital.getSalaVacunacion().haciendoVacunas(this);
+                    hospital.getSalaDescanso().descansoAuxiliar2(this);
+
+                }
             }
-
         } catch (InterruptedException ex) {
             Logger.getLogger(Auxiliar.class.getName()).log(Level.SEVERE, null, ex);
         }
