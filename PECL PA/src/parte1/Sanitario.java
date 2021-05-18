@@ -22,6 +22,7 @@ public class Sanitario extends Thread {
     private String identificador;
     private final Lock lock = new ReentrantLock();
     private Hospital hospital;
+    private int puesto;
 
     public Sanitario(int id, Hospital hospital) {
         if(id<10){
@@ -41,6 +42,16 @@ public class Sanitario extends Thread {
         this.identificador = identificador;
     }
 
+    public int getPuesto() {
+        return puesto;
+    }
+
+    public void setPuesto(int puesto) {
+        this.puesto = puesto;
+    }
+    
+    
+
 
     @Override
     public void run() {
@@ -54,6 +65,7 @@ public class Sanitario extends Thread {
                 }
                 for (int i = 0; i < 15; i++) {
                 hospital.getSalaVacunacion().sanitarioVacuna(this);
+                hospital.getSalaVacunacion().puestoSanitario(this);
                 hospital.getSalaVacunacion().salirSan(this);
                 }
                 hospital.getSalaDescanso().descansoSanitario(this);

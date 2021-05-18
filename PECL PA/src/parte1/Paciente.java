@@ -21,6 +21,7 @@ public class Paciente extends Thread {
     private final Hospital hospital;
     private String identificador;
     private boolean cita;
+    private int puesto;
 
     public Paciente(int id, boolean cita, Hospital hospital) {
         if (id < 10) {
@@ -52,6 +53,15 @@ public class Paciente extends Thread {
         this.cita = cita;
     }
 
+    public int getPuesto() {
+        return puesto;
+    }
+
+    public void setPuesto(int puesto) {
+        this.puesto = puesto;
+    }
+    
+
     @Override
     public void run() {
         try {
@@ -62,6 +72,7 @@ public class Paciente extends Thread {
                 hospital.getRecepcion().salir(this);
             
                 hospital.getSalaVacunacion().entrar(this);
+                hospital.getSalaVacunacion().puestoPaciente(this);
                 hospital.getSalaVacunacion().salir(this);
 
                 hospital.getSalaObservacion().entrar(this);
