@@ -25,10 +25,10 @@ public class SalaVacunacion {
     private final javax.swing.JTextField vacunasDisponibles;
 
     private final Lock lock = new ReentrantLock();
-    private  Paciente[] puestoPaciente = {null,null,null,null,null,null,null,null,null,null};
+    private final  Paciente[] puestoPaciente = {null,null,null,null,null,null,null,null,null,null};
     private int pp =0; 
     
-    private  Sanitario[] puestoSanitario = {null,null,null,null,null,null,null,null,null,null};
+    private final  Sanitario[] puestoSanitario = {null,null,null,null,null,null,null,null,null,null};
     private int ps =0;
 
     //private final ArrayList<Sanitario> puestoSanitario = new ArrayList<>();
@@ -107,9 +107,6 @@ public class SalaVacunacion {
             puestoPaciente[eleccion]= p;
             pp++;
             p.setPuesto(eleccion);
-
-                
-            
 
         } catch (InterruptedException e) {
         } finally {

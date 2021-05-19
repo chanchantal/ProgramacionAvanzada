@@ -76,7 +76,7 @@ public class Paciente extends Thread {
                 hospital.getSalaVacunacion().salir(this);
 
                 hospital.getSalaObservacion().entrar(this);
-                hospital.getSalaObservacion().estaReposando(this);
+                hospital.getSalaObservacion().puesto(this);
                 hospital.getSalaObservacion().salir(this);
             }else{
                 hospital.getRecepcion().salir(this);

@@ -38,8 +38,12 @@ public class SalaObservacion {
     private boolean reaccion;
     private final Lock lock = new ReentrantLock();
 
-    private final ArrayList<Paciente> reposar = new ArrayList<>();
-;
+    private final Paciente[] puestoPaciente = {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null};
+    private int pp = 0;
+
+    private Sanitario[] puestoSanitario = {null, null, null, null, null, null, null, null, null, null};
+    private int ps = 0;
+
     private ArrayList<JTextField> arrayTxt = new ArrayList<>();
 
     private final Semaphore sanitarioObserva = new Semaphore(0);
@@ -115,13 +119,18 @@ public class SalaObservacion {
 
     public void entrar(Paciente p) throws BrokenBarrierException {
         lock.lock();
+        int eleccion;
         try {
-            while (reposar.size() > 20) {
+            while (pp >= 20) {
                 esperar.await();
             }
-            reposar.add(p);
-           
-            arrayTxt.get(reposar.indexOf(p)).setText(p.getIdentificador());//Añado el paciente en los JtextField
+
+            do {
+                eleccion = (int) (Math.random() * 20);
+            } while (puestoPaciente[eleccion] != null);
+            puestoPaciente[eleccion] = p;
+            pp++;
+            p.setPuesto(eleccion);
 
         } catch (InterruptedException e) {
         } finally {
@@ -137,36 +146,35 @@ public class SalaObservacion {
     public void salir(Paciente p) throws InterruptedException {
         lock.lock();
         try {
-            reposar.remove(p);
-
+            puestoPaciente[p.getPuesto()] = null;
+            pp--;
             esperar.signalAll();
         } finally {
             lock.unlock();
         }
-
     }
 
     public void sanitarioObserva(Sanitario s) throws InterruptedException {
         sanitarioObserva.acquire();
-
+        reaccion = false;
         System.out.println("El sanitario esta atendiendo al paciente");
         Thread.sleep((int) (Math.random() * (5000 - 2000 + 1) + 2000));
         pacienteReacciona.release();
-
+        
     }
 
     public void reaccion(Paciente p) throws InterruptedException {
 
+        Thread.sleep(10000);
         int probabilidad = (int) ((Math.random() * (100 - 1 + 1) + 1));
 
         if (probabilidad > 0 && probabilidad < 5) {
             reaccion = true;
             System.out.println(p.getIdentificador() + " está sufriendo una reacción a la vacuna");
-            pacienteReacciona.acquire();
             sanitarioObserva.release();
-            arrayTxt.get(probabilidad).setText(sanitario.getIdentificador());
+            pacienteReacciona.acquire();
             System.out.println("el sanitario ha atendido al paciente" + p.getIdentificador());
-            reaccion = false;
+            
         }
     }
 
@@ -178,131 +186,130 @@ public class SalaObservacion {
         this.reaccion = reaccion;
     }
 
-    public void puesto(int eleccion, String id) throws InterruptedException, BrokenBarrierException {
-
+    public void puesto(Paciente p) throws InterruptedException, BrokenBarrierException {
+        int eleccion = p.getPuesto();
         switch (eleccion) {
+
             case 0:
-                puesto1Txt.setText(puesto1Txt.getText() + " " + id);
-                // jtextfield del puesto 0 y le hago un setText del id del paciente y del sanitario
-                puesto1.await();
-                
+                puesto1Txt.setText(puesto1Txt.getText() + " " + p.getIdentificador());
+                reaccion(p);
+
                 puesto1Txt.setText(" ");
                 break;
             case 1:
-                puesto2Txt.setText(puesto2Txt.getText() + " " + id);
-                puesto2.await();
-                
+                puesto2Txt.setText(puesto2Txt.getText() + " " + p.getIdentificador());
+                reaccion(p);
+
                 puesto2Txt.setText(" ");
                 break;
 
             case 2:
-                puesto3Txt.setText(puesto3Txt.getText() + " " + id);
-                puesto3.await();
-                
+                puesto3Txt.setText(puesto3Txt.getText() + " " + p.getIdentificador());
+                reaccion(p);
+
                 puesto3Txt.setText("");
                 break;
             case 3:
-                puesto4Txt.setText(puesto4Txt.getText() + " " + id);
-                puesto4.await();
-                
+                puesto4Txt.setText(puesto4Txt.getText() + " " + p.getIdentificador());
+                reaccion(p);
                 puesto4Txt.setText("");
                 break;
             case 4:
-                puesto5Txt.setText(puesto5Txt.getText() + " " + id);
-                puesto5.await();
-                
+                puesto5Txt.setText(puesto5Txt.getText() + " " + p.getIdentificador());
+                reaccion(p);
+
                 puesto5Txt.setText("");
                 break;
             case 5:
-                puesto6Txt.setText(puesto6Txt.getText() + " " + id);
-                puesto6.await();
-                
+                puesto6Txt.setText(puesto6Txt.getText() + " " + p.getIdentificador());
+                reaccion(p);
+
                 puesto6Txt.setText("");
                 break;
             case 6:
-                puesto7Txt.setText(puesto7Txt.getText() + " " + id);
-                puesto7.await();
-                
+                puesto7Txt.setText(puesto7Txt.getText() + " " + p.getIdentificador());
+                reaccion(p);
+
                 puesto7Txt.setText("");
                 break;
             case 7:
-                puesto8Txt.setText(puesto8Txt.getText() + " " + id);
-                puesto8.await();
-                
+                puesto8Txt.setText(puesto8Txt.getText() + " " + p.getIdentificador());
+                reaccion(p);
+
                 puesto8Txt.setText("");
                 break;
             case 8:
-                puesto9Txt.setText(puesto9Txt.getText() + " " + id);
-                puesto9.await();
-                
+                puesto9Txt.setText(puesto9Txt.getText() + " " + p.getIdentificador());
+                reaccion(p);
+
                 puesto9Txt.setText("");
                 break;
             case 9:
-                puesto10Txt.setText(puesto10Txt.getText() + " " + id);
-                puesto10.await();
-                
+                puesto10Txt.setText(puesto10Txt.getText() + " " + p.getIdentificador());
+                reaccion(p);
+
                 puesto10Txt.setText("");
                 break;
             case 10:
-                puesto11Txt.setText(puesto11Txt.getText() + " " + id);
-                // jtextfield del puesto 0 y le hago un setText del id del paciente y del sanitario
-                puesto1.await();
-                
+                puesto11Txt.setText(puesto11Txt.getText() + " " + p.getIdentificador());
+
+                reaccion(p);
+
                 puesto11Txt.setText(" ");
                 break;
             case 11:
-                puesto12Txt.setText(puesto12Txt.getText() + " " + id);
-                puesto12.await();
-                
+                puesto12Txt.setText(puesto12Txt.getText() + " " + p.getIdentificador());
+                reaccion(p);
+
                 puesto12Txt.setText(" ");
                 break;
 
             case 12:
-                puesto13Txt.setText(puesto13Txt.getText() + " " + id);
-                puesto13.await();
-                
+                puesto13Txt.setText(puesto13Txt.getText() + " " + p.getIdentificador());
+                reaccion(p);
+
                 puesto13Txt.setText("");
                 break;
             case 13:
-                puesto14Txt.setText(puesto14Txt.getText() + " " + id);
-                puesto14.await();
-                
+                puesto14Txt.setText(puesto14Txt.getText() + " " + p.getIdentificador());
+                reaccion(p);
+
                 puesto14Txt.setText("");
                 break;
             case 14:
-                puesto15Txt.setText(puesto15Txt.getText() + " " + id);
-                puesto15.await();
-                
+                puesto15Txt.setText(puesto15Txt.getText() + " " + p.getIdentificador());
+                reaccion(p);
+
                 puesto15Txt.setText("");
                 break;
             case 15:
-                puesto16Txt.setText(puesto16Txt.getText() + " " + id);
-                puesto16.await();
-                
+                puesto16Txt.setText(puesto16Txt.getText() + " " + p.getIdentificador());
+                reaccion(p);
+
                 puesto16Txt.setText("");
                 break;
             case 16:
-                puesto17Txt.setText(puesto17Txt.getText() + " " + id);
-                puesto17.await();
-                
+                puesto17Txt.setText(puesto17Txt.getText() + " " + p.getIdentificador());
+                reaccion(p);
+
                 puesto17Txt.setText("");
                 break;
             case 17:
-                puesto18Txt.setText(puesto18Txt.getText() + " " + id);
-                puesto18.await();
-                
+                puesto18Txt.setText(puesto18Txt.getText() + " " + p.getIdentificador());
+                reaccion(p);
+
                 puesto18Txt.setText("");
                 break;
             case 18:
-                puesto19Txt.setText(puesto19Txt.getText() + " " + id);
-                puesto19.await();
-                
+                puesto19Txt.setText(puesto19Txt.getText() + " " + p.getIdentificador());
+                reaccion(p);
+
                 puesto19Txt.setText("");
                 break;
             case 19:
-                puesto20Txt.setText(puesto20Txt.getText() + " " + id);
-                puesto20.await();
-                
+                puesto20Txt.setText(puesto20Txt.getText() + " " + p.getIdentificador());
+                reaccion(p);
+
                 puesto20Txt.setText("");
                 break;
         }
