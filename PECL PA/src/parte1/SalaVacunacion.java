@@ -10,7 +10,9 @@ import java.util.concurrent.locks.ReentrantLock;
 import javax.swing.JTextField;
 
 public class SalaVacunacion {
-
+    private EscrituraTexto et;
+    private Paciente paciente;
+    
     private final javax.swing.JTextField puesto1Txt;
     private final javax.swing.JTextField puesto2Txt;
     private final javax.swing.JTextField puesto3Txt;
@@ -22,34 +24,47 @@ public class SalaVacunacion {
     private final javax.swing.JTextField puesto9Txt;
     private final javax.swing.JTextField puesto10Txt;
     private final javax.swing.JTextField auxiliarTxt;
-
-    private Paciente paciente;
-    private Sanitario sanitario;
+    private final javax.swing.JTextField vacunasDisponibles;
 
     private final Lock lock = new ReentrantLock();
+    private final  Paciente[] puestoPaciente = {null,null,null,null,null,null,null,null,null,null};
+    private int pp =0; 
+    
+    private final  Sanitario[] puestoSanitario = {null,null,null,null,null,null,null,null,null,null};
+    private int ps =0;
 
-
-    private final ArrayList<Sanitario> puestoSanitario = new ArrayList<>();
-    private final ArrayList<Paciente> puestoPaciente = new ArrayList<>();
+   
     private final ArrayList<Integer> colaVacunas = new ArrayList<>();
     private ArrayList<JTextField> arrayTxt = new ArrayList<>();
 
     private final Condition esperaS = lock.newCondition();
     private final Condition esperaP = lock.newCondition();
 
+    private final Semaphore semaforoVacuna = new Semaphore(0);
 
-    private final CyclicBarrier puesto1 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto2 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto3 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto4 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto5 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto6 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto7 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto8 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto9 = new CyclicBarrier(2);
-    private final CyclicBarrier puesto10 = new CyclicBarrier(2);
+    private final Semaphore puesto1 = new Semaphore(0);
+    private final Semaphore puesto2 = new Semaphore(0);
+    private final Semaphore puesto3 = new Semaphore(0);
+    private final Semaphore puesto4 = new Semaphore(0);
+    private final Semaphore puesto5 = new Semaphore(0);
+    private final Semaphore puesto6 = new Semaphore(0);
+    private final Semaphore puesto7 = new Semaphore(0);
+    private final Semaphore puesto8 = new Semaphore(0);
+    private final Semaphore puesto9 = new Semaphore(0);
+    private final Semaphore puesto10 = new Semaphore(0);
+    
+    private final Semaphore puesto1s = new Semaphore(0);
+    private final Semaphore puesto2s = new Semaphore(0);
+    private final Semaphore puesto3s = new Semaphore(0);
+    private final Semaphore puesto4s = new Semaphore(0);
+    private final Semaphore puesto5s = new Semaphore(0);
+    private final Semaphore puesto6s = new Semaphore(0);
+    private final Semaphore puesto7s = new Semaphore(0);
+    private final Semaphore puesto8s = new Semaphore(0);
+    private final Semaphore puesto9s = new Semaphore(0);
+    private final Semaphore puesto10s = new Semaphore(0);
 
-    public SalaVacunacion(JTextField puesto1Txt, JTextField puesto2Txt, JTextField puesto3Txt, JTextField puesto4Txt, JTextField puesto5Txt, JTextField puesto6Txt, JTextField puesto7Txt, JTextField puesto8Txt, JTextField puesto9Txt, JTextField puesto10Txt, JTextField auxiliarTxt) {
+    public SalaVacunacion(JTextField puesto1Txt, JTextField puesto2Txt, JTextField puesto3Txt, JTextField puesto4Txt, JTextField puesto5Txt, JTextField puesto6Txt, JTextField puesto7Txt, JTextField puesto8Txt, JTextField puesto9Txt, JTextField puesto10Txt, JTextField auxiliarTxt, JTextField vacunasDisponibles, EscrituraTexto et) {
         arrayTxt = new ArrayList<>();
         arrayTxt.add(puesto1Txt);
         arrayTxt.add(puesto2Txt);
@@ -72,155 +87,266 @@ public class SalaVacunacion {
         this.puesto9Txt = puesto9Txt;
         this.puesto10Txt = puesto10Txt;
         this.auxiliarTxt = auxiliarTxt;
-
+        this.vacunasDisponibles = vacunasDisponibles;
+        this.et = et;
     }
 
     public void entrar(Paciente p) throws BrokenBarrierException, InterruptedException { //entra el paciente a vacunarse
-
         lock.lock();
-
+        int eleccion;
         try {
-            while (puestoPaciente.size() >= 10) {
+            while (pp >= 10) {
                 esperaP.await();
             }
-            puestoPaciente.add(p);
+            
+            do {
+                    eleccion = (int) (Math.random() * 10);
+            } while ( puestoPaciente[eleccion] != null);
+            
+            puestoPaciente[eleccion]= p;
+            pp++;
+            p.setPuesto(eleccion);
 
-            // colaVacunas.remove(p);
         } catch (InterruptedException e) {
         } finally {
-
             lock.unlock();
         }
-        for (int j = 0; j < puestoPaciente.size(); j++) {
-            if (puestoPaciente.get(j) == p) {
-                puesto(j, p.getIdentificador());
-            }
-        }
+        
     }
 
     public void salir(Paciente p) {
         lock.lock();
         try {
-            puestoPaciente.remove(p);
+            puestoPaciente[p.getPuesto()] = null;
+            pp--;
             esperaP.signalAll();
         } finally {
             lock.unlock();
         }
     }
 
+    public void sanitarioVacuna(Sanitario s) throws InterruptedException, BrokenBarrierException { //aquí pongo la vacuna
+        lock.lock();
+        int eleccion;
+        try {
+            while (ps >= 10) {
+                esperaS.await();
+            }
+            do {
+                    eleccion = (int) (Math.random() * 10);
+            } while (puestoSanitario[eleccion] != null);
+            puestoSanitario[eleccion]= s;
+            ps++;
+            s.setPuesto(eleccion);
+           
+        } catch (InterruptedException e) {
+        } finally {
+            lock.unlock();
+        }
+        
+
+    }
+
     public void salirSan(Sanitario s) {
         lock.lock();
         try {
-            puestoSanitario.remove(s);
+            
+            puestoSanitario[s.getPuesto()]=null;
+            ps--;
             esperaS.signal();
         } finally {
             lock.unlock();
         }
-
     }
 
     public void haciendoVacunas(Auxiliar a) throws InterruptedException {
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 21; i++) {
             colaVacunas.add(i);
             auxiliarTxt.setText(a.getIdentificador());
             Thread.sleep((int) (Math.random() * ((1000 - 500 + 1) + 500)));
-
+            vacunasDisponibles.setText("" + colaVacunas.size());
+            semaforoVacuna.release();
         }
+        auxiliarTxt.setText("");
     }
 
-    public void sanitarioVacuna(Sanitario s) throws InterruptedException, BrokenBarrierException { //aquí pongo la vacuna
+    public void cogeVacuna() throws InterruptedException {
 
-        lock.lock();
-        try {
+        semaforoVacuna.acquire();
+        colaVacunas.remove(0);
+    }          
+    
+    public void puestoPaciente(Paciente p) throws InterruptedException, BrokenBarrierException {
+        
+            int eleccion = p.getPuesto();
+            switch (eleccion) {
+                case 0:
+                    puesto1Txt.setText(puesto1Txt.getText() + " " + p.getIdentificador());
 
-            while (puestoSanitario.size() >= 10) {
-                esperaS.await();
+                    puesto1s.release();
+
+                    puesto1.acquire();
+                    break;
+                case 1:
+                    puesto2Txt.setText(puesto2Txt.getText() + " " + p.getIdentificador());
+
+                    puesto2s.release();
+                    puesto2.acquire();
+                    break;
+
+                case 2:
+                    puesto3Txt.setText(puesto3Txt.getText() + " " + p.getIdentificador());
+
+                    puesto3s.release();
+                    puesto3.acquire();
+                    break;
+                case 3:
+                    puesto4Txt.setText(puesto4Txt.getText() + " " + p.getIdentificador());
+
+                    puesto4s.release();
+                    puesto4.acquire();
+                    break;
+                case 4:
+                    puesto5Txt.setText(puesto5Txt.getText() + " " + p.getIdentificador());
+
+                    puesto5s.release();
+                    puesto5.acquire();
+                    break;
+                case 5:
+                    puesto6Txt.setText(puesto6Txt.getText() + " " + p.getIdentificador());
+
+                    puesto6s.release();
+                    puesto6.acquire();
+                    break;
+                case 6:
+                    puesto7Txt.setText(puesto7Txt.getText() + " " + p.getIdentificador());
+
+                    puesto7s.release();
+                    puesto7.acquire();
+                    break;
+                case 7:
+                    puesto8Txt.setText(puesto8Txt.getText() + " " + p.getIdentificador());
+
+                    puesto8s.release();
+                    puesto8.acquire();
+                    break;
+                case 8:
+                    puesto9Txt.setText(puesto9Txt.getText() + " " + p.getIdentificador());
+
+                    puesto9s.release();
+                    puesto9.acquire();
+                    break;
+                case 9:
+                    puesto10Txt.setText(puesto10Txt.getText() + " " + p.getIdentificador());
+
+                    puesto10s.release();
+                    puesto10.acquire();
+                    break;
+
             }
+        
+    }
+    
+    public void puestoSanitario(Sanitario s) throws InterruptedException, BrokenBarrierException {
+        
             
-            puestoSanitario.add(s);
-            colaVacunas.remove(0);
+            int eleccion =s.getPuesto();
+         
+            switch (eleccion) {
+                case 0 -> {
+                    puesto1Txt.setText(puesto1Txt.getText() + " " + s.getIdentificador());
 
-        } catch (InterruptedException e) {
-        } finally {
+                    puesto1s.acquire();
+                    cogeVacuna();
+                    Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
+                    puesto1Txt.setText("");
+                    puesto1.release();
+            }
+                case 1 -> {
+                    puesto2Txt.setText(puesto2Txt.getText() + " " + s.getIdentificador());
 
-            lock.unlock();
-        }
-        for (int j = 0; j < puestoSanitario.size(); j++) {
-            if (puestoSanitario.get(j) == s) {
-                
-                puesto(j, s.getIdentificador());
+                    puesto2s.acquire();
+                    cogeVacuna();
+                    Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
+                    puesto2Txt.setText("");
+                    puesto2.release();
+            }
+
+                case 2 -> {
+                    puesto3Txt.setText(puesto3Txt.getText() + " " + s.getIdentificador());
+
+                    puesto3s.acquire();
+                    cogeVacuna();
+                    Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
+                    puesto3Txt.setText("");
+                    puesto3.release();
+            }
+                case 3 -> {
+                    puesto4Txt.setText(puesto4Txt.getText() + " " + s.getIdentificador());
+
+                    puesto4s.acquire();
+                    cogeVacuna();
+                    Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
+                    puesto4Txt.setText("");
+                    puesto4.release();
+            }
+                case 4 -> {
+                    puesto5Txt.setText(puesto5Txt.getText() + " " + s.getIdentificador());
+
+                    puesto5s.acquire();
+                    cogeVacuna();
+                    Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
+                    puesto5Txt.setText("");
+                    puesto5.release();
+            }
+                case 5 -> {
+                    puesto6Txt.setText(puesto6Txt.getText() + " " + s.getIdentificador());
+
+                    puesto6s.acquire();
+                    cogeVacuna();
+                    Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
+                    puesto6Txt.setText("");
+                    puesto6.release();
+            }
+                case 6 -> {
+                    puesto7Txt.setText(puesto7Txt.getText() + " " + s.getIdentificador());
+
+                    puesto7s.acquire();
+                    cogeVacuna();
+                    Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
+                    puesto7Txt.setText("");
+                    puesto7.release();
+            }
+                case 7 -> {
+                    puesto8Txt.setText(puesto8Txt.getText() + " " + s.getIdentificador());
+
+                    puesto8s.acquire();
+                    cogeVacuna();
+                    Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
+                    puesto8Txt.setText("");
+                    puesto8.release();
+            }
+                case 8 -> {
+                    puesto9Txt.setText(puesto9Txt.getText() + " " + s.getIdentificador());
+
+                    puesto9s.acquire();
+                    cogeVacuna();
+                    Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
+                    puesto9Txt.setText("");
+                    puesto9.release();
+            }
+                case 9 -> {
+                    puesto10Txt.setText(puesto10Txt.getText() + " " + s.getIdentificador());
+
+                    puesto10s.acquire();
+                    cogeVacuna();
+                    Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
+                    puesto10Txt.setText("");
+                    puesto10.release();;
+            }
 
             }
-        }
-
-    }
-
-    public void puesto(int eleccion, String id) throws InterruptedException, BrokenBarrierException {
-        switch (eleccion) {
-            case 0:
-                puesto1Txt.setText(puesto1Txt.getText() + " " + id);
-                // jtextfield del puesto 0 y le hago un setText del id del paciente y del sanitario
-                puesto1.await();
-                Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                puesto1Txt.setText(" ");
-                break;
-            case 1:
-                puesto2Txt.setText(puesto2Txt.getText() + " " + id);
-                puesto2.await();
-                Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                puesto2Txt.setText(" ");
-                break;
-
-            case 2:
-                puesto3Txt.setText(puesto3Txt.getText() + " " + id);
-                puesto3.await();
-                Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                puesto3Txt.setText("");
-                break;
-            case 3:
-                puesto4Txt.setText(puesto4Txt.getText() + " " + id);
-                puesto4.await();
-                Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                puesto4Txt.setText("");
-                break;
-            case 4:
-                puesto5Txt.setText(puesto5Txt.getText() + " " + id);
-                puesto5.await();
-                Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                puesto5Txt.setText("");
-                break;
-            case 5:
-                puesto6Txt.setText(puesto6Txt.getText() + " " + id);
-                puesto6.await();
-                Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                puesto6Txt.setText("");
-                break;
-            case 6:
-                puesto7Txt.setText(puesto7Txt.getText() + " " + id);
-                puesto7.await();
-                Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                puesto7Txt.setText("");
-                break;
-            case 7:
-                puesto8Txt.setText(puesto8Txt.getText() + " " + id);
-                puesto8.await();
-                Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                puesto8Txt.setText("");
-                break;
-            case 8:
-                puesto9Txt.setText(puesto9Txt.getText() + " " + id);
-                puesto9.await();
-                Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                puesto9Txt.setText("");
-                break;
-            case 9:
-                puesto10Txt.setText(puesto10Txt.getText() + " " + id);
-                puesto10.await();
-                Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                puesto10Txt.setText("");
-                break;
-
-        }
+        
     }
 }

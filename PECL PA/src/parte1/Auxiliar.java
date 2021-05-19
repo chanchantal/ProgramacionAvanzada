@@ -1,5 +1,6 @@
 package parte1;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,9 +17,8 @@ import java.util.logging.Logger;
 public class Auxiliar extends Thread {
 
     private String identificador;
-    private Hospital hospital;
-    private boolean cita;
-    private Paciente paciente;
+    private final Hospital hospital;
+
 
     public Auxiliar(int id, Hospital hospital) {
         identificador = "A" + id;
@@ -39,9 +39,8 @@ public class Auxiliar extends Thread {
             while (true) {
                 if ("A1".equals(identificador)) {
                     //Este es el run de recepcion
-                  
+
                     hospital.getRecepcion().auxiliarRegistra(this);
-                    
                     hospital.getSalaDescanso().descansoAuxiliar1(this);
 
                 } else {
@@ -51,7 +50,7 @@ public class Auxiliar extends Thread {
 
                 }
             }
-        } catch (InterruptedException ex) {
+        } catch (InterruptedException | IOException ex) {
             Logger.getLogger(Auxiliar.class.getName()).log(Level.SEVERE, null, ex);
         }
 
