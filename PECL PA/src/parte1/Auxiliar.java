@@ -1,5 +1,6 @@
 package parte1;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,7 +50,7 @@ public class Auxiliar extends Thread {
 
                 }
             }
-        } catch (InterruptedException ex) {
+        } catch (InterruptedException | IOException ex) {
             Logger.getLogger(Auxiliar.class.getName()).log(Level.SEVERE, null, ex);
         }
 

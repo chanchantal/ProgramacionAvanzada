@@ -10,7 +10,9 @@ import java.util.concurrent.locks.ReentrantLock;
 import javax.swing.JTextField;
 
 public class SalaVacunacion {
-
+    private EscrituraTexto et;
+    private Paciente paciente;
+    
     private final javax.swing.JTextField puesto1Txt;
     private final javax.swing.JTextField puesto2Txt;
     private final javax.swing.JTextField puesto3Txt;
@@ -31,8 +33,7 @@ public class SalaVacunacion {
     private final  Sanitario[] puestoSanitario = {null,null,null,null,null,null,null,null,null,null};
     private int ps =0;
 
-    //private final ArrayList<Sanitario> puestoSanitario = new ArrayList<>();
-    //private final ArrayList<Paciente> puestoPaciente = new ArrayList<>();
+   
     private final ArrayList<Integer> colaVacunas = new ArrayList<>();
     private ArrayList<JTextField> arrayTxt = new ArrayList<>();
 
@@ -63,7 +64,7 @@ public class SalaVacunacion {
     private final Semaphore puesto9s = new Semaphore(0);
     private final Semaphore puesto10s = new Semaphore(0);
 
-    public SalaVacunacion(JTextField puesto1Txt, JTextField puesto2Txt, JTextField puesto3Txt, JTextField puesto4Txt, JTextField puesto5Txt, JTextField puesto6Txt, JTextField puesto7Txt, JTextField puesto8Txt, JTextField puesto9Txt, JTextField puesto10Txt, JTextField auxiliarTxt, JTextField vacunasDisponibles) {
+    public SalaVacunacion(JTextField puesto1Txt, JTextField puesto2Txt, JTextField puesto3Txt, JTextField puesto4Txt, JTextField puesto5Txt, JTextField puesto6Txt, JTextField puesto7Txt, JTextField puesto8Txt, JTextField puesto9Txt, JTextField puesto10Txt, JTextField auxiliarTxt, JTextField vacunasDisponibles, EscrituraTexto et) {
         arrayTxt = new ArrayList<>();
         arrayTxt.add(puesto1Txt);
         arrayTxt.add(puesto2Txt);
@@ -87,9 +88,7 @@ public class SalaVacunacion {
         this.puesto10Txt = puesto10Txt;
         this.auxiliarTxt = auxiliarTxt;
         this.vacunasDisponibles = vacunasDisponibles;
-        
-        
-
+        this.et = et;
     }
 
     public void entrar(Paciente p) throws BrokenBarrierException, InterruptedException { //entra el paciente a vacunarse
@@ -139,6 +138,7 @@ public class SalaVacunacion {
             puestoSanitario[eleccion]= s;
             ps++;
             s.setPuesto(eleccion);
+           
         } catch (InterruptedException e) {
         } finally {
             lock.unlock();
@@ -150,6 +150,7 @@ public class SalaVacunacion {
     public void salirSan(Sanitario s) {
         lock.lock();
         try {
+            
             puestoSanitario[s.getPuesto()]=null;
             ps--;
             esperaS.signal();

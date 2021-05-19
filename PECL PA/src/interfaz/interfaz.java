@@ -10,10 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import parte1.*;
 
-/**
- *
- * @author Usuario
- */
 public class interfaz extends javax.swing.JFrame {
 
     /**
@@ -23,7 +19,7 @@ public class interfaz extends javax.swing.JFrame {
         initComponents();
         EscrituraTexto et = new EscrituraTexto();
         SalaDescanso salaDescanso = new SalaDescanso(jTextFieldSalaDescanso1, jTextFieldSalaDescanso2);
-        SalaVacunacion salaVacunacion = new SalaVacunacion(jTextFieldPuestoV1, jTextFieldPuestoV2, jTextFieldPuestoV3, jTextFieldPuestoV4, jTextFieldPuestoV5, jTextFieldPuestoV6, jTextFieldPuestoV7, jTextFieldPuestoV8, jTextFieldPuestoV9, jTextFieldPuestoV10, jTextFieldauxiliarV, jTextFieldvacunasDisponibles);
+        SalaVacunacion salaVacunacion = new SalaVacunacion(jTextFieldPuestoV1, jTextFieldPuestoV2, jTextFieldPuestoV3, jTextFieldPuestoV4, jTextFieldPuestoV5, jTextFieldPuestoV6, jTextFieldPuestoV7, jTextFieldPuestoV8, jTextFieldPuestoV9, jTextFieldPuestoV10, jTextFieldauxiliarV, jTextFieldvacunasDisponibles, et);
         SalaObservacion salaObservacion = new SalaObservacion(jTextFieldPuestoO1, jTextFieldPuestoO2, jTextFieldPuestoO3, jTextFieldPuestoO4, jTextFieldPuestoO5, jTextFieldPuestoO6, jTextFieldPuestoO7, jTextFieldPuestoO8, jTextFieldPuestoO9, jTextFieldPuestoO10, jTextFieldPuestoO11, jTextFieldPuestoO12, jTextFieldPuestoO13, jTextFieldPuestoO14, jTextFieldPuestoO15, jTextFieldPuestoO16, jTextFieldPuestoO17, jTextFieldPuestoO18, jTextFieldPuestoO19, jTextFieldPuestoO20);
         Recepcion recepcion = new Recepcion(jTextFieldColaEspera, jTextFieldPaciente, jTextFieldAuxiliarR, et);
         Hospital hospital = new Hospital(recepcion, salaDescanso, salaObservacion, salaVacunacion);
