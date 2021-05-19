@@ -15,6 +15,7 @@ public class Recepcion {
     private final javax.swing.JTextField auxiliarTxt;
     private Auxiliar auxiliar;
     private Paciente paciente;
+    private EscrituraTexto et;
     
     private final ArrayList<Paciente> colaRecepcion = new ArrayList<>();
     private final ArrayList<Paciente> paraVacunar = new ArrayList<>();
@@ -29,10 +30,11 @@ public class Recepcion {
     private final Condition esperar = lock.newCondition();
     private final Condition recepcion = lock.newCondition();
 
-    public Recepcion(JTextField colaEsperaTxt, JTextField pacienteTxt, JTextField auxiliarTxt) {
+    public Recepcion(JTextField colaEsperaTxt, JTextField pacienteTxt, JTextField auxiliarTxt, EscrituraTexto et) {
         this.colaEsperaTxt = colaEsperaTxt;
         this.pacienteTxt = pacienteTxt;
         this.auxiliarTxt = auxiliarTxt;
+        this.et = et;
     }
 
 
@@ -41,6 +43,7 @@ public class Recepcion {
         for (int i = 0; i < 10; i++) {
             auxiliarRegistra.acquire();
             auxiliarTxt.setText(a.getIdentificador());
+            et.auxiliarRegistra(a, paciente);
             Thread.sleep((int) (Math.random() * ((1000 - 500 + 1) + 500)));
             pacienteEspera.release();
         }
@@ -48,9 +51,10 @@ public class Recepcion {
         auxiliarTxt.setText("");
     }
 
-    public void pacienteEspera() {
+    public void pacienteEspera(Paciente p) {
         try {
             auxiliarRegistra.release();
+            paciente = p;
             pacienteEspera.acquire();
         } catch (InterruptedException ex) {
             Logger.getLogger(Recepcion.class.getName()).log(Level.SEVERE, null, ex);

@@ -67,7 +67,7 @@ public class Paciente extends Thread {
         try {
             
             hospital.getRecepcion().pacienteEntra(this);
-            hospital.getRecepcion().pacienteEspera();
+            hospital.getRecepcion().pacienteEspera(this);
             if (cita == true) {
                 hospital.getRecepcion().salir(this);
             

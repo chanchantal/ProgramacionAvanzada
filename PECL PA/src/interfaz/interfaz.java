@@ -5,6 +5,9 @@
  */
 package interfaz;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import parte1.*;
 
 /**
@@ -16,16 +19,16 @@ public class interfaz extends javax.swing.JFrame {
     /**
      * Creates new form interfaz
      */
-    public interfaz() {
+    public interfaz() throws IOException {
         initComponents();
-
+        EscrituraTexto et = new EscrituraTexto();
         SalaDescanso salaDescanso = new SalaDescanso(jTextFieldSalaDescanso1, jTextFieldSalaDescanso2);
         SalaVacunacion salaVacunacion = new SalaVacunacion(jTextFieldPuestoV1, jTextFieldPuestoV2, jTextFieldPuestoV3, jTextFieldPuestoV4, jTextFieldPuestoV5, jTextFieldPuestoV6, jTextFieldPuestoV7, jTextFieldPuestoV8, jTextFieldPuestoV9, jTextFieldPuestoV10, jTextFieldauxiliarV, jTextFieldvacunasDisponibles);
         SalaObservacion salaObservacion = new SalaObservacion(jTextFieldPuestoO1, jTextFieldPuestoO2, jTextFieldPuestoO3, jTextFieldPuestoO4, jTextFieldPuestoO5, jTextFieldPuestoO6, jTextFieldPuestoO7, jTextFieldPuestoO8, jTextFieldPuestoO9, jTextFieldPuestoO10, jTextFieldPuestoO11, jTextFieldPuestoO12, jTextFieldPuestoO13, jTextFieldPuestoO14, jTextFieldPuestoO15, jTextFieldPuestoO16, jTextFieldPuestoO17, jTextFieldPuestoO18, jTextFieldPuestoO19, jTextFieldPuestoO20);
-        Recepcion recepcion = new Recepcion(jTextFieldColaEspera, jTextFieldPaciente, jTextFieldAuxiliarR);
+        Recepcion recepcion = new Recepcion(jTextFieldColaEspera, jTextFieldPaciente, jTextFieldAuxiliarR, et);
         Hospital hospital = new Hospital(recepcion, salaDescanso, salaObservacion, salaVacunacion);
-
-
+        
+        
         for (int i = 1; i < 21; i++) {
             Sanitario s = new Sanitario(i, hospital);
            
@@ -610,7 +613,11 @@ public class interfaz extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new interfaz().setVisible(true);
+                try {
+                    new interfaz().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(interfaz.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
