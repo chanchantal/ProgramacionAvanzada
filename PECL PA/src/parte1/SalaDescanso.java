@@ -8,7 +8,7 @@ import javax.swing.JTextField;
 
 public class SalaDescanso {
 
-    private Sanitario sanitario;
+    private EscrituraTexto et;
 
     private final Lock lock = new ReentrantLock();
     private final Lock lockVestidor = new ReentrantLock();
@@ -24,9 +24,10 @@ public class SalaDescanso {
     private final javax.swing.JTextField colaDescansoTxtAux;
 
 
-    public SalaDescanso(JTextField colaDescansoTxtSan, JTextField colaDescansoTxtAux) {
+    public SalaDescanso(JTextField colaDescansoTxtSan, JTextField colaDescansoTxtAux, EscrituraTexto et) {
         this.colaDescansoTxtSan = colaDescansoTxtSan;
         this.colaDescansoTxtAux = colaDescansoTxtAux;
+        this.et=et;
         vacunar = new ArrayList<>(10);
     }
 
@@ -46,11 +47,15 @@ public class SalaDescanso {
     public boolean descansoSanitario(Sanitario s) throws InterruptedException {
         lock.lock();
         try {
+            et.inicioDescansoS(s);
             descansoS.add(s);
+
             imprimirColaDescansoSanitario();
             Thread.sleep((int) (Math.random() * ((8000 - 5000 + 1) + 5000)));
             descansoS.remove(s);
             imprimirColaDescansoSanitario();
+            et.finDescansoS(s);
+
         } finally {
             lock.unlock();
         }
@@ -61,10 +66,12 @@ public class SalaDescanso {
         lock.lock();
         try {
             descansoA.add(a);
+            et.inicioDescansoA(a);
             imprimirColaDescansoAuxiliar();
             Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000))); 
             descansoA.remove(a);
             imprimirColaDescansoAuxiliar();
+            et.finDescansoA(a);
         } finally {
             lock.unlock();
         }
@@ -74,10 +81,12 @@ public class SalaDescanso {
         lock.lock();
         try {
             descansoA.add(a);
+            et.inicioDescansoA(a);
             imprimirColaDescansoAuxiliar();
             Thread.sleep((int) (Math.random() * ((4000 - 1000 + 1) + 1000)));
             descansoA.remove(a);
             imprimirColaDescansoAuxiliar();
+            et.finDescansoA(a);
         } finally {
             lock.unlock();
         }

@@ -18,9 +18,9 @@ public class interfaz extends javax.swing.JFrame {
     public interfaz() throws IOException {
         initComponents();
         EscrituraTexto et = new EscrituraTexto();
-        SalaDescanso salaDescanso = new SalaDescanso(jTextFieldSalaDescanso1, jTextFieldSalaDescanso2);
+        SalaDescanso salaDescanso = new SalaDescanso(jTextFieldSalaDescanso1, jTextFieldSalaDescanso2, et);
         SalaVacunacion salaVacunacion = new SalaVacunacion(jTextFieldPuestoV1, jTextFieldPuestoV2, jTextFieldPuestoV3, jTextFieldPuestoV4, jTextFieldPuestoV5, jTextFieldPuestoV6, jTextFieldPuestoV7, jTextFieldPuestoV8, jTextFieldPuestoV9, jTextFieldPuestoV10, jTextFieldauxiliarV, jTextFieldvacunasDisponibles, et);
-        SalaObservacion salaObservacion = new SalaObservacion(jTextFieldPuestoO1, jTextFieldPuestoO2, jTextFieldPuestoO3, jTextFieldPuestoO4, jTextFieldPuestoO5, jTextFieldPuestoO6, jTextFieldPuestoO7, jTextFieldPuestoO8, jTextFieldPuestoO9, jTextFieldPuestoO10, jTextFieldPuestoO11, jTextFieldPuestoO12, jTextFieldPuestoO13, jTextFieldPuestoO14, jTextFieldPuestoO15, jTextFieldPuestoO16, jTextFieldPuestoO17, jTextFieldPuestoO18, jTextFieldPuestoO19, jTextFieldPuestoO20);
+        SalaObservacion salaObservacion = new SalaObservacion(jTextFieldPuestoO1, jTextFieldPuestoO2, jTextFieldPuestoO3, jTextFieldPuestoO4, jTextFieldPuestoO5, jTextFieldPuestoO6, jTextFieldPuestoO7, jTextFieldPuestoO8, jTextFieldPuestoO9, jTextFieldPuestoO10, jTextFieldPuestoO11, jTextFieldPuestoO12, jTextFieldPuestoO13, jTextFieldPuestoO14, jTextFieldPuestoO15, jTextFieldPuestoO16, jTextFieldPuestoO17, jTextFieldPuestoO18, jTextFieldPuestoO19, jTextFieldPuestoO20, et);
         Recepcion recepcion = new Recepcion(jTextFieldColaEspera, jTextFieldPaciente, jTextFieldAuxiliarR, et);
         Hospital hospital = new Hospital(recepcion, salaDescanso, salaObservacion, salaVacunacion);
         
@@ -36,7 +36,7 @@ public class interfaz extends javax.swing.JFrame {
             a.start();
         }
 
-        CreaPacientes p = new CreaPacientes(hospital);
+        CreaPacientes p = new CreaPacientes(hospital, et);
         p.start();
     }
 
@@ -116,22 +116,23 @@ public class interfaz extends javax.swing.JFrame {
         jTextFieldPuestoO12 = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
+        jTextFieldPuestoO15 = new javax.swing.JTextField();
+        jTextFieldPuestoO14 = new javax.swing.JTextField();
+        jTextFieldPuestoO16 = new javax.swing.JTextField();
+        jLabel33 = new javax.swing.JLabel();
+        jTextFieldPuestoO17 = new javax.swing.JTextField();
         jLabel36 = new javax.swing.JLabel();
+        jTextFieldPuestoO18 = new javax.swing.JTextField();
         jLabel37 = new javax.swing.JLabel();
+        jTextFieldPuestoO19 = new javax.swing.JTextField();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
-        jTextFieldPuestoO15 = new javax.swing.JTextField();
-        jTextFieldPuestoO16 = new javax.swing.JTextField();
-        jTextFieldPuestoO17 = new javax.swing.JTextField();
-        jTextFieldPuestoO14 = new javax.swing.JTextField();
-        jTextFieldPuestoO18 = new javax.swing.JTextField();
-        jTextFieldPuestoO19 = new javax.swing.JTextField();
         jTextFieldPuestoO20 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText(" RECEPCIÓN");
 
@@ -169,24 +170,20 @@ public class interfaz extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jTextFieldColaEspera))
                     .addGroup(recepcionLayout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addGroup(recepcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(recepcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(recepcionLayout.createSequentialGroup()
+                                .addComponent(jTextFieldPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(83, 83, 83)))
+                        .addGap(5, 5, 5)
                         .addGroup(recepcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(recepcionLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel3))
-                            .addGroup(recepcionLayout.createSequentialGroup()
-                                .addGap(119, 119, 119)
-                                .addGroup(recepcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(recepcionLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jTextFieldPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(89, 89, 89)
-                        .addGroup(recepcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(recepcionLayout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 15, Short.MAX_VALUE))
-                            .addComponent(jTextFieldAuxiliarR))))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldAuxiliarR, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 85, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         recepcionLayout.setVerticalGroup(
@@ -200,7 +197,7 @@ public class interfaz extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(recepcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(recepcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -375,90 +372,90 @@ public class interfaz extends javax.swing.JFrame {
         jPanelSalaObservacion.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 0, 128, 27));
 
         jLabel20.setText("Puesto 1");
-        jPanelSalaObservacion.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+        jPanelSalaObservacion.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         jLabel21.setText("Puesto 2");
-        jPanelSalaObservacion.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, -1));
+        jPanelSalaObservacion.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
 
         jLabel22.setText("Puesto 3");
-        jPanelSalaObservacion.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, -1, -1));
+        jPanelSalaObservacion.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
 
         jLabel23.setText("Puesto 4");
-        jPanelSalaObservacion.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, -1, -1));
+        jPanelSalaObservacion.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, -1, -1));
 
         jLabel24.setText("Puesto 5");
-        jPanelSalaObservacion.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, -1, -1));
+        jPanelSalaObservacion.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, -1, -1));
 
         jLabel25.setText("Puesto 6");
-        jPanelSalaObservacion.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, -1, -1));
+        jPanelSalaObservacion.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, -1, -1));
 
         jLabel26.setText("Puesto 7");
-        jPanelSalaObservacion.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, -1, -1));
+        jPanelSalaObservacion.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, -1, -1));
 
         jLabel27.setText("Puesto 8");
-        jPanelSalaObservacion.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, -1, -1));
+        jPanelSalaObservacion.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, -1, -1));
 
         jLabel28.setText("Puesto 9");
-        jPanelSalaObservacion.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 50, -1, -1));
+        jPanelSalaObservacion.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 40, -1, -1));
 
         jLabel29.setText("Puesto 10");
-        jPanelSalaObservacion.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 50, -1, -1));
+        jPanelSalaObservacion.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 40, -1, -1));
 
         jLabel30.setText("Puesto 11");
-        jPanelSalaObservacion.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, -1, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 55, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 50, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO10, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, 60, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 55, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 50, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 50, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 50, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, 56, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO8, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 60, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO9, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 70, 56, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 57, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO13, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 50, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 60, -1));
+        jPanelSalaObservacion.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 55, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 50, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO10, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 60, 50, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 55, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 50, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 60, 50, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 50, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO7, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, 50, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO8, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 50, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO9, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 60, 50, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO11, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 140, 50, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO13, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 50, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO12, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 50, -1));
 
         jLabel31.setText("Puesto 12");
-        jPanelSalaObservacion.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 118, -1, -1));
+        jPanelSalaObservacion.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
 
         jLabel32.setText("Puesto 15");
-        jPanelSalaObservacion.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, -1, -1));
-
-        jLabel33.setText("Puesto 16");
-        jPanelSalaObservacion.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(349, 118, -1, -1));
+        jPanelSalaObservacion.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, -1, -1));
 
         jLabel34.setText("Puesto 13");
-        jPanelSalaObservacion.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 118, -1, -1));
+        jPanelSalaObservacion.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, -1));
 
         jLabel35.setText("Puesto 14");
-        jPanelSalaObservacion.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, -1, -1));
-
-        jLabel36.setText("Puesto 17");
-        jPanelSalaObservacion.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, -1, -1));
-
-        jLabel37.setText("Puesto 18");
-        jPanelSalaObservacion.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, -1, -1));
-
-        jLabel38.setText("Puesto 19");
-        jPanelSalaObservacion.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 120, -1, -1));
-
-        jLabel39.setText("Puesto 20");
-        jPanelSalaObservacion.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, -1, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO15, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 50, -1));
+        jPanelSalaObservacion.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, -1, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO15, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 50, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO14, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 48, -1));
 
         jTextFieldPuestoO16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPuestoO16ActionPerformed(evt);
             }
         });
-        jPanelSalaObservacion.add(jTextFieldPuestoO16, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 50, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO17, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 60, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO14, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 48, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO18, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 140, 62, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO19, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, 58, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO20, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 140, 60, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO16, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 50, -1));
+
+        jLabel33.setText("Puesto 16");
+        jPanelSalaObservacion.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, -1, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO17, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 50, -1));
+
+        jLabel36.setText("Puesto 17");
+        jPanelSalaObservacion.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, -1, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO18, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 140, 50, -1));
+
+        jLabel37.setText("Puesto 18");
+        jPanelSalaObservacion.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, -1, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO19, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, 50, -1));
+
+        jLabel38.setText("Puesto 19");
+        jPanelSalaObservacion.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 120, -1, -1));
+
+        jLabel39.setText("Puesto 20");
+        jPanelSalaObservacion.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 120, -1, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO20, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 140, 50, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -483,26 +480,7 @@ public class interfaz extends javax.swing.JFrame {
                 .addComponent(jPanelSalaObservacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 865, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 601, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 64, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 64, Short.MAX_VALUE)))
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 64, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

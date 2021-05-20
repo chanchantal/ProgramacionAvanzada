@@ -1,0 +1,28 @@
+2021-05-20T19:45:56.067063500: El auxiliar A1 ha registrado al paciente P0001
+2021-05-20T19:45:57.040032500: El auxiliar A1 ha registrado al paciente P0002
+2021-05-20T19:45:57.532466500: El auxiliar A1 ha registrado al paciente P0003
+2021-05-20T19:45:59.247709300: El auxiliar A1 ha registrado al paciente P0004
+2021-05-20T19:46:00.005509600: El sanitario S01 ha vacunado al paciente P0002 en el puesto 6
+2021-05-20T19:46:01.031177300: El auxiliar A1 ha registrado al paciente P0005
+2021-05-20T19:46:02.314730600: El auxiliar A1 ha registrado al paciente P0006
+2021-05-20T19:46:03.738418600: El auxiliar A1 ha registrado al paciente P0007
+2021-05-20T19:46:06.637596700: El auxiliar A1 ha registrado al paciente P0008
+2021-05-20T19:46:07.157904300: El auxiliar A2 ha iniciado su descanso
+2021-05-20T19:46:08.109766500: El sanitario S02 ha vacunado al paciente P0005 en el puesto 10
+2021-05-20T19:46:08.256318300: El auxiliar A2 ha acabado su descanso
+2021-05-20T19:46:08.926787500: El sanitario S03 ha vacunado al paciente P0004 en el puesto 5
+2021-05-20T19:46:09.569624500: El auxiliar A1 ha registrado al paciente P0009
+2021-05-20T19:46:10.305113: El sanitario S04 ha vacunado al paciente P0007 en el puesto 1
+2021-05-20T19:46:10.674316200: El sanitario S04 ha vacunado al paciente P0001 en el puesto 8
+2021-05-20T19:46:12.192226800: El auxiliar A1 ha registrado al paciente P0010
+2021-05-20T19:46:12.358666800: El sanitario S02 ha vacunado al paciente P0006 en el puesto 6
+2021-05-20T19:46:12.625834500: El auxiliar A1 ha iniciado su descanso
+2021-05-20T19:46:13.948498900: El auxiliar A1 ha acabado su descanso
+2021-05-20T19:46:13.949502900: El auxiliar A1 ha registrado al paciente P0011
+2021-05-20T19:46:14.698723300: El auxiliar A1 ha registrado al paciente P0012
+2021-05-20T19:46:14.903873400: El sanitario S01 ha vacunado al paciente P0010 en el puesto 4
+2021-05-20T19:46:14.965263100: El paciente P0002 ha sufrido una reacción a la vacuna, y el sanitario S06 le ha atendido
+2021-05-20T19:46:16.030340300: El sanitario S04 ha vacunado al paciente P0012 en el puesto 8
+2021-05-20T19:46:16.478474800: El auxiliar A1 ha registrado al paciente P0013
+2021-05-20T19:46:16.860411600: El sanitario S01 ha vacunado al paciente P0009 en el puesto 1
+2021-05-20T19:46:17.281931400: El sanitario S01 ha vacunado al paciente P0011 en el puesto 10

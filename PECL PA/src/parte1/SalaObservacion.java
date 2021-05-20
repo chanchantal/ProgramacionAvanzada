@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 
 public class SalaObservacion {
 
+    private EscrituraTexto et;
     private final javax.swing.JTextField puesto1Txt;
     private final javax.swing.JTextField puesto2Txt;
     private final javax.swing.JTextField puesto3Txt;
@@ -41,7 +42,7 @@ public class SalaObservacion {
     private int pp = 0;
 
     private ArrayList<JTextField> arrayTxt = new ArrayList<>();
-
+    private ArrayList<Integer> puestos = new ArrayList<>();
     private final Semaphore sanitarioObserva = new Semaphore(0);
     private final Semaphore pacienteReacciona = new Semaphore(0);
 
@@ -49,7 +50,7 @@ public class SalaObservacion {
 
 
 
-    public SalaObservacion(JTextField puesto1Txt, JTextField puesto2Txt, JTextField puesto3Txt, JTextField puesto4Txt, JTextField puesto5Txt, JTextField puesto6Txt, JTextField puesto7Txt, JTextField puesto8Txt, JTextField puesto9Txt, JTextField puesto10Txt, JTextField puesto11Txt, JTextField puesto12Txt, JTextField puesto13Txt, JTextField puesto14Txt, JTextField puesto15Txt, JTextField puesto16Txt, JTextField puesto17Txt, JTextField puesto18Txt, JTextField puesto19Txt, JTextField puesto20Txt) {
+    public SalaObservacion(JTextField puesto1Txt, JTextField puesto2Txt, JTextField puesto3Txt, JTextField puesto4Txt, JTextField puesto5Txt, JTextField puesto6Txt, JTextField puesto7Txt, JTextField puesto8Txt, JTextField puesto9Txt, JTextField puesto10Txt, JTextField puesto11Txt, JTextField puesto12Txt, JTextField puesto13Txt, JTextField puesto14Txt, JTextField puesto15Txt, JTextField puesto16Txt, JTextField puesto17Txt, JTextField puesto18Txt, JTextField puesto19Txt, JTextField puesto20Txt, EscrituraTexto et) {
         arrayTxt = new ArrayList<>();
         arrayTxt.add(puesto1Txt);
         arrayTxt.add(puesto2Txt);
@@ -92,6 +93,7 @@ public class SalaObservacion {
         this.puesto19Txt = puesto19Txt;
         this.puesto20Txt = puesto20Txt;
         this.reaccion = false;
+        this.et=et;
     }
 
     public void entrar(Paciente p) throws BrokenBarrierException {
@@ -129,9 +131,12 @@ public class SalaObservacion {
 
     public void sanitarioObserva(Sanitario s) throws InterruptedException {
         sanitarioObserva.acquire();
+        s.setPuesto(puestos.get(0));
+        puestos.remove(0);
         reaccion = false;
-        System.out.println("El sanitario esta atendiendo al paciente");
         Thread.sleep((int) (Math.random() * (5000 - 2000 + 1) + 2000));
+        et.reaccionPaciente(s, puestoPaciente[s.getPuesto()]);
+        System.out.println("El sanitario " + s.getIdentificador() + " esta atendiendo al paciente " + puestoPaciente[s.getPuesto()].getIdentificador());
         pacienteReacciona.release();
         
     }
@@ -141,12 +146,13 @@ public class SalaObservacion {
         Thread.sleep(10000);
         int probabilidad = (int) ((Math.random() * (100 - 1 + 1) + 1));
 
-        if (probabilidad > 0 && probabilidad < 5) {
+        if (probabilidad > 0 && probabilidad < 90) {
             reaccion = true;
-            System.out.println(p.getIdentificador() + " está sufriendo una reacción a la vacuna");
+            System.out.println("El paciente " + p.getIdentificador() + " está sufriendo una reacción a la vacuna");
+            puestos.add(p.getPuesto());
             sanitarioObserva.release();
             pacienteReacciona.acquire();
-            System.out.println("el sanitario ha atendido al paciente" + p.getIdentificador());
+            
             
         }
     }

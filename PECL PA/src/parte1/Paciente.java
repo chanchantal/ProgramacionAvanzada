@@ -17,13 +17,13 @@ import java.util.logging.Logger;
     -Si hay reacción, les atiende un sanitario (el 5%)
  */
 public class Paciente extends Thread {
-
+    private EscrituraTexto et;
     private final Hospital hospital;
     private String identificador;
     private boolean cita;
     private int puesto;
 
-    public Paciente(int id, boolean cita, Hospital hospital) {
+    public Paciente(int id, boolean cita, Hospital hospital, EscrituraTexto et) {
         if (id < 10) {
             identificador = "P000" + id;
         } else if (id < 100) {
@@ -35,6 +35,7 @@ public class Paciente extends Thread {
         }
         this.cita = cita;
         this.hospital = hospital;
+        this.et = et;
     }
 
     public String getIdentificador() {
@@ -79,7 +80,11 @@ public class Paciente extends Thread {
                 hospital.getSalaObservacion().puesto(this);
                 hospital.getSalaObservacion().salir(this);
             }else{
+                System.out.println("El paciente " + this + " ha acudido sin cita");
+                et.pacienteSinCita(this);
                 hospital.getRecepcion().salir(this);
+                
+                
             }
         } catch (InterruptedException | BrokenBarrierException ex) {
             Logger.getLogger(Paciente.class.getName()).log(Level.SEVERE, null, ex);
