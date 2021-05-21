@@ -9,9 +9,15 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import javax.swing.JTextField;
 
+
+/**
+* En la clase SalaVacunacion el paciente entrará, irá a un puesto aleatorio, y el
+* Sanitario se encargará de vacunarle. Por otra parte, el Auxiliar 2 estará en todo
+* momento haciendo vacunas para los sanitarios. 
+ */
 public class SalaVacunacion {
 
-    private EscrituraTexto et;
+    private final EscrituraTexto et;
     private Paciente paciente;
 
     private final javax.swing.JTextField puesto1Txt;
@@ -64,6 +70,11 @@ public class SalaVacunacion {
     private final Semaphore puesto9s = new Semaphore(0);
     private final Semaphore puesto10s = new Semaphore(0);
 
+    /**
+    * En el constructor inicializamos los JTextField necesarios para poder poner 
+    * en funcionamiento la interfaz, así como la clase de EscrituraTexto, que
+    * se encargará de rellenar el log
+     */
     public SalaVacunacion(JTextField puesto1Txt, JTextField puesto2Txt, JTextField puesto3Txt, JTextField puesto4Txt, JTextField puesto5Txt, JTextField puesto6Txt, JTextField puesto7Txt, JTextField puesto8Txt, JTextField puesto9Txt, JTextField puesto10Txt, JTextField auxiliarTxt, JTextField vacunasDisponibles, EscrituraTexto et) {
         arrayTxt = new ArrayList<>();
         arrayTxt.add(puesto1Txt);
@@ -91,6 +102,11 @@ public class SalaVacunacion {
         this.et = et;
     }
 
+    /**
+    * El método entrar hará que un paciente entre a un puesto en la sala de Vacunación. 
+    * Tendrá un lock para que pasen de uno en uno, se comprueba si la sala está llena, 
+    * y si tiene acceso elegirá un puesto aleatorio para acceder a él. 
+     */
     public void entrar(Paciente p) throws BrokenBarrierException, InterruptedException { //entra el paciente a vacunarse
         lock.lock();
         int eleccion;
@@ -114,6 +130,11 @@ public class SalaVacunacion {
 
     }
 
+    
+    /**
+    * El método salir se encargará de sacar a un paciente de la sala de Vacunación, 
+    * así como del puesto en el que se encontraba presente. 
+    */
     public void salir(Paciente p) {
         lock.lock();
         try {
@@ -124,7 +145,13 @@ public class SalaVacunacion {
             lock.unlock();
         }
     }
-
+    
+    /**
+    * El método sanitarioVacuna se encargará de proporcionar la vacuna a los pacientes
+    * Tiene un procedimiento parecido al de entrar. Se echa un lock, se comprueba si
+    * tiene espacio en la sala para acceder, se le deriva a un puesto de vacunación
+    * libre y pone la vacuna. 
+    */
     public void sanitarioVacuna(Sanitario s) throws InterruptedException, BrokenBarrierException { //aquí pongo la vacuna
         lock.lock();
         int eleccion;
@@ -146,10 +173,14 @@ public class SalaVacunacion {
 
     }
 
+    /**
+    * El método salirSan se encarga de sacar al Sanitario para que deje libre
+    * su puesto.
+    */
     public void salirSan(Sanitario s) {
         lock.lock();
         try {
-
+            
             puestoSanitario[s.getPuesto()] = null;
             ps--;
             esperaS.signal();
@@ -158,6 +189,11 @@ public class SalaVacunacion {
         }
     }
 
+    
+    /**
+    * En el método haciendoVacunas el auxiliar 2 se encargará de hacer las vacunas
+    * para proporcionarlas a los sanitarios. 
+    */
     public void haciendoVacunas(Auxiliar a) throws InterruptedException {
 
         for (int i = 0; i < 21; i++) {
@@ -170,12 +206,25 @@ public class SalaVacunacion {
         auxiliarTxt.setText("");
     }
 
+    
+    /**
+    * El método cogeVacuna se encarga de liberar el semáforo de Vacuna que cierra
+    * el auxiliar a la hora de crear una vacuna, y luego se encarga de retirar una
+    * de las vacunas de la cola en la que se encuentra. Este método se le pasa
+    * a sanitarioVacuna para que cumpla su procedimiento. 
+    */    
     public void cogeVacuna() throws InterruptedException {
 
         semaforoVacuna.acquire();
         colaVacunas.remove(0);
     }
 
+    /**
+    * El método puestoPaciente se encarga de interactuar con puestoSanitario para
+    * conseguir que ambos, paciente y sanitario, acaben ocupando el mismo puesto
+    * para poder poner la vacuna. Es un juego de semáforos que conecta el puesto del
+    * paciente con el del sanitario. 
+    */
     public void puestoPaciente(Paciente p) throws InterruptedException, BrokenBarrierException {
 
         int eleccion = p.getPuesto();
@@ -247,6 +296,10 @@ public class SalaVacunacion {
 
     }
 
+    /**
+    * Método complementario a puestoPaciente. En este, a parte, nos encargamos de imprimir
+    * imprimir qué paciente ha sido vacunado por qué sanitario y en qué puesto. 
+     */
     public void puestoSanitario(Sanitario s) throws InterruptedException, BrokenBarrierException {
 
         int eleccion = s.getPuesto();
@@ -258,8 +311,8 @@ public class SalaVacunacion {
                 puesto1s.acquire();
                 cogeVacuna();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador() + 
-                        " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 1");
+                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador()
+                        + " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 1");
                 et.vacunacion(s, puestoPaciente[0], 1);
                 puesto1Txt.setText("");
                 puesto1.release();
@@ -270,8 +323,8 @@ public class SalaVacunacion {
                 puesto2s.acquire();
                 cogeVacuna();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador() + 
-                        " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 2");
+                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador()
+                        + " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 2");
                 et.vacunacion(s, puestoPaciente[1], 2);
                 puesto2Txt.setText("");
                 puesto2.release();
@@ -283,8 +336,8 @@ public class SalaVacunacion {
                 puesto3s.acquire();
                 cogeVacuna();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador() + 
-                        " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 3");
+                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador()
+                        + " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 3");
                 et.vacunacion(s, puestoPaciente[2], 3);
                 puesto3Txt.setText("");
                 puesto3.release();
@@ -295,8 +348,8 @@ public class SalaVacunacion {
                 puesto4s.acquire();
                 cogeVacuna();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador() + 
-                        " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 4");
+                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador()
+                        + " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 4");
                 et.vacunacion(s, puestoPaciente[3], 4);
                 puesto4Txt.setText("");
                 puesto4.release();
@@ -307,8 +360,8 @@ public class SalaVacunacion {
                 puesto5s.acquire();
                 cogeVacuna();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador() + 
-                        " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 5");
+                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador()
+                        + " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 5");
                 et.vacunacion(s, puestoPaciente[4], 5);
                 puesto5Txt.setText("");
                 puesto5.release();
@@ -319,8 +372,8 @@ public class SalaVacunacion {
                 puesto6s.acquire();
                 cogeVacuna();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador() + 
-                        " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 6");
+                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador()
+                        + " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 6");
                 et.vacunacion(s, puestoPaciente[5], 6);
                 puesto6Txt.setText("");
                 puesto6.release();
@@ -331,8 +384,8 @@ public class SalaVacunacion {
                 puesto7s.acquire();
                 cogeVacuna();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador() + 
-                        " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 7");
+                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador()
+                        + " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 7");
                 et.vacunacion(s, puestoPaciente[6], 7);
                 puesto7Txt.setText("");
                 puesto7.release();
@@ -343,8 +396,8 @@ public class SalaVacunacion {
                 puesto8s.acquire();
                 cogeVacuna();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador() + 
-                        " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 8");
+                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador()
+                        + " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 8");
                 et.vacunacion(s, puestoPaciente[7], 8);
                 puesto8Txt.setText("");
                 puesto8.release();
@@ -355,8 +408,8 @@ public class SalaVacunacion {
                 puesto9s.acquire();
                 cogeVacuna();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador() + 
-                        " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 9");
+                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador()
+                        + " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 9");
                 et.vacunacion(s, puestoPaciente[8], 9);
                 puesto9Txt.setText("");
                 puesto9.release();
@@ -367,8 +420,8 @@ public class SalaVacunacion {
                 puesto10s.acquire();
                 cogeVacuna();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
-                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador() + 
-                        " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 10");
+                System.out.println("Paciente " + puestoPaciente[s.getPuesto()].getIdentificador()
+                        + " ha sido vacunado por el Sanitario " + s.getIdentificador() + " en el puesto 10");
                 et.vacunacion(s, puestoPaciente[9], 10);
                 puesto10Txt.setText("");
                 puesto10.release();;

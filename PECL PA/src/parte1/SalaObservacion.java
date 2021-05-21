@@ -8,9 +8,14 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import javax.swing.JTextField;
 
+
+/**
+* La clase SalaObservación recogerá a los pacientes que acaban de ser vacunados, 
+* para tenerlos en observación un tiempo y comprobar si sufren alguna reacción
+*/
 public class SalaObservacion {
 
-    private EscrituraTexto et;
+    private final EscrituraTexto et;
     private final javax.swing.JTextField puesto1Txt;
     private final javax.swing.JTextField puesto2Txt;
     private final javax.swing.JTextField puesto3Txt;
@@ -49,7 +54,11 @@ public class SalaObservacion {
     private final Condition esperar = lock.newCondition();
 
 
-
+    /**
+    * En el constructor inicializamos los JTextField necesarios para poder poner 
+    * en funcionamiento la interfaz, así como la clase de EscrituraTexto, que
+    * se encargará de rellenar el log
+     */
     public SalaObservacion(JTextField puesto1Txt, JTextField puesto2Txt, JTextField puesto3Txt, JTextField puesto4Txt, JTextField puesto5Txt, JTextField puesto6Txt, JTextField puesto7Txt, JTextField puesto8Txt, JTextField puesto9Txt, JTextField puesto10Txt, JTextField puesto11Txt, JTextField puesto12Txt, JTextField puesto13Txt, JTextField puesto14Txt, JTextField puesto15Txt, JTextField puesto16Txt, JTextField puesto17Txt, JTextField puesto18Txt, JTextField puesto19Txt, JTextField puesto20Txt, EscrituraTexto et) {
         arrayTxt = new ArrayList<>();
         arrayTxt.add(puesto1Txt);
@@ -96,6 +105,11 @@ public class SalaObservacion {
         this.et=et;
     }
 
+    /**
+    * El método entrar funciona igual que en la SalaVacunación. El paciente entra
+    * controlado por un lock, comprueba que hay puestos disponibles y accede a uno
+    * de manera aleatoria. 
+    */
     public void entrar(Paciente p) throws BrokenBarrierException {
         lock.lock();
         int eleccion;
@@ -117,7 +131,10 @@ public class SalaObservacion {
         }
     }
 
-
+    /**
+    * El método salir se encarga de sacar a los pacientes del array de pacientes, 
+    * y también de dejar el puesto vacío. 
+    */
     public void salir(Paciente p) throws InterruptedException {
         lock.lock();
         try {
@@ -129,6 +146,11 @@ public class SalaObservacion {
         }
     }
 
+    /**
+    * sanitarioObserva entra en funcionamiento cuando un paciente experimenta una reacción
+    * a la vacuna. Se entrelaza con el método reacción mediante un semáforo. Atiende
+    * al paciente y finalmente liberan ambos el puesto. 
+    */
     public void sanitarioObserva(Sanitario s) throws InterruptedException {
         sanitarioObserva.acquire();
         s.setPuesto(puestos.get(0));
@@ -141,6 +163,12 @@ public class SalaObservacion {
         
     }
 
+    /**
+    * El método reacción cumple dos funciones: por una parte ejecuta el descanso del
+    * paciente que tiene que hacer obligatoriamente en la sala de descanso, y por 
+    * otra parte saca una probabilidad de que al paciente le de una reacción a la vacuna,
+    * llamándo así a un sanitario para que le atienda. 
+    */
     public void reaccion(Paciente p) throws InterruptedException {
 
         Thread.sleep(10000);
@@ -157,14 +185,25 @@ public class SalaObservacion {
         }
     }
 
+    /**
+    * Devuelve el boolean reaccion, el cual indica si el paciente sufre o no reacción. 
+    */
     public boolean isReaccion() {
         return reaccion;
     }
 
+    /**
+    * Establece el boolean reaccion, el cual indica si el paciente sufre o no reacción. 
+    */
     public void setReaccion(boolean reaccion) {
         this.reaccion = reaccion;
     }
 
+    /**
+    * El método puestoPaciente se encarga de introducir a los pacientes en un puesto 
+    * de los disponibles. A todos se les pasa el método reacción para que hagan el 
+    * descanso y compruebe si tiene o no reacción. 
+    */
     public void puesto(Paciente p) throws InterruptedException, BrokenBarrierException {
         int eleccion = p.getPuesto();
         switch (eleccion) {

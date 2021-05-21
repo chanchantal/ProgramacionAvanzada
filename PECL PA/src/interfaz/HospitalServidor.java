@@ -5,58 +5,32 @@
  */
 package interfaz;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.util.concurrent.BrokenBarrierException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import parte1.Auxiliar;
-import parte1.CreaPacientes;
-import parte1.EscrituraTexto;
-import parte1.Hospital;
-import parte1.Paciente;
-import parte1.Recepcion;
-import parte1.SalaDescanso;
-import parte1.SalaObservacion;
-import parte1.SalaVacunacion;
-import parte1.Sanitario;
+import javax.swing.JFrame;
+
 
 /**
  *
  * @author ctati
  */
-public class HospitalServidor extends javax.swing.JFrame {
+public class HospitalServidor extends JFrame {
 
-    Hospital hospital;
-    Sanitario sanitario;
+
 
     /**
      * Creates new form HospitalServidor
      */
-    public HospitalServidor() throws IOException {
+    public HospitalServidor() {
+
+        
         initComponents();
-        EscrituraTexto et = new EscrituraTexto();
-        SalaDescanso salaDescanso = new SalaDescanso(jTextFieldSalaDescanso1, jTextFieldSalaDescanso2, et);
-        SalaVacunacion salaVacunacion = new SalaVacunacion(jTextFieldPuestoV1, jTextFieldPuestoV2, jTextFieldPuestoV3, jTextFieldPuestoV4, jTextFieldPuestoV5, jTextFieldPuestoV6, jTextFieldPuestoV7, jTextFieldPuestoV8, jTextFieldPuestoV9, jTextFieldPuestoV10, jTextFieldauxiliarV, jTextFieldvacunasDisponibles, et);
-        SalaObservacion salaObservacion = new SalaObservacion(jTextFieldPuestoO1, jTextFieldPuestoO2, jTextFieldPuestoO3, jTextFieldPuestoO4, jTextFieldPuestoO5, jTextFieldPuestoO6, jTextFieldPuestoO7, jTextFieldPuestoO8, jTextFieldPuestoO9, jTextFieldPuestoO10, jTextFieldPuestoO11, jTextFieldPuestoO12, jTextFieldPuestoO13, jTextFieldPuestoO14, jTextFieldPuestoO15, jTextFieldPuestoO16, jTextFieldPuestoO17, jTextFieldPuestoO18, jTextFieldPuestoO19, jTextFieldPuestoO20, et);
-        Recepcion recepcion = new Recepcion(jTextFieldColaEspera, jTextFieldPaciente, jTextFieldAuxiliarR, et);
-        Hospital hospital = new Hospital(recepcion, salaDescanso, salaObservacion, salaVacunacion);
-
-        for (int i = 1; i < 21; i++) {
-            Sanitario s = new Sanitario(i, hospital);
-
-            s.start();
-        }
-
-        for (int i = 1; i < 3; i++) {
-            Auxiliar a = new Auxiliar(i, hospital);
-            a.start();
-        }
-        CreaPacientes p = new CreaPacientes(hospital, et);
-        p.start();
+        
+        ClienteHilo cl = new ClienteHilo(jTextFieldColaEspera);
+        cl.start();
+        
+        
 
     }
 
@@ -624,41 +598,7 @@ public class HospitalServidor extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        Socket servi;
-        DataInputStream entrada;
-        DataOutputStream salida;
-        String idP, idS;
-
-        jTextFieldPuestoV1.setText("");// para limpar el JTextField
-        try {
-            //No aparece el sanitario mandado en la sala de descanso
-            hospital.getSalaDescanso().descansoSanitario(sanitario);
-            hospital.getSalaVacunacion().sanitarioVacuna(sanitario);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(HospitalServidor.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (BrokenBarrierException ex) {
-            Logger.getLogger(HospitalServidor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            servi = new Socket(InetAddress.getLocalHost(), 5000);
-            entrada = new DataInputStream(servi.getInputStream());
-            salida = new DataOutputStream(servi.getOutputStream());
-            salida.writeInt(1);
-
-            //no estoy segura 
-            idP = jTextFieldPuestoV1.getText();
-            salida.writeUTF(idP); //Enviamos un mensaje al servidor
-            idS = entrada.readUTF(); //Leemos la respuesta
-            jTextFieldPuestoV1.setText(idS);
-
-            entrada.close(); //Cerramos los flujos de entrada y salida
-            salida.close();
-            servi.close(); //Cerramos la conexión
-
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -692,11 +632,7 @@ public class HospitalServidor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new HospitalServidor().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(HospitalServidor.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new HospitalServidor().setVisible(true);
             }
         });
     }
