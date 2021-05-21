@@ -81,6 +81,10 @@ public class ServidorHospital extends Thread {
                 salida.close();
                 conexion.close();
             }
+
+
+
+
             
         } catch (IOException ex) {
             Logger.getLogger(ServidorHospital.class.getName()).log(Level.SEVERE, null, ex);
