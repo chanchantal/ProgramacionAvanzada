@@ -142,5 +142,13 @@ public class Recepcion {
         auxiliarTxt.setText(auxiliar.getIdentificador());
         this.auxiliar = auxiliar;
     }
+
+    public String getColaEspera() {
+        return colaEsperaTxt.getText();
+    }
+
+    
+    
+    
 }
 

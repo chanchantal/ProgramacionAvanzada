@@ -30,7 +30,7 @@ public class ServidorHospital extends Thread {
         this.hospital = hospital;
 
         try{
-            servidor = new ServerSocket(5000);
+            servidor = new ServerSocket(30000);
         
     }   catch (IOException ex) {
             Logger.getLogger(ServidorHospital.class.getName()).log(Level.SEVERE, null, ex);
@@ -47,35 +47,27 @@ public class ServidorHospital extends Thread {
                 switch(numero){
                     // No esta completo
                     case 1:
-                        salida.writeUTF(paciente.getIdentificador());
-                        salida.writeUTF(sanitario.getIdentificador());
+                        salida.writeUTF(hospital.getRecepcion().getColaEspera());
+                        break;
                     case 2:
-                        salida.writeUTF(paciente.getIdentificador());
-                        salida.writeUTF(sanitario.getIdentificador());
+                        
+                        break;
                     case 3:
-                        salida.writeUTF(paciente.getIdentificador());
-                        salida.writeUTF(sanitario.getIdentificador());
+                        break;
                     case 4:
-                        salida.writeUTF(paciente.getIdentificador());
-                        salida.writeUTF(sanitario.getIdentificador());
+                        break;
                     case 5:
-                        salida.writeUTF(paciente.getIdentificador());
-                        salida.writeUTF(sanitario.getIdentificador());
+                        break;
                     case 6:
-                        salida.writeUTF(paciente.getIdentificador());
-                        salida.writeUTF(sanitario.getIdentificador());
+                        break;
                     case 7:
-                        salida.writeUTF(paciente.getIdentificador());
-                        salida.writeUTF(sanitario.getIdentificador());
+                        break;
                     case 8:
-                        salida.writeUTF(paciente.getIdentificador());
-                        salida.writeUTF(sanitario.getIdentificador());
+                        break;
                     case 9:
-                        salida.writeUTF(paciente.getIdentificador());
-                        salida.writeUTF(sanitario.getIdentificador());
+                        break;
                     case 10:
-                        salida.writeUTF(paciente.getIdentificador());
-                        salida.writeUTF(sanitario.getIdentificador());
+                        break;
                 }
                 entrada.close();
                 salida.close();
