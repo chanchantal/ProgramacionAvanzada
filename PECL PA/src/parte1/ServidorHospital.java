@@ -30,7 +30,7 @@ public class ServidorHospital extends Thread {
         this.hospital = hospital;
 
         try{
-            servidor = new ServerSocket(5000);
+            servidor = new ServerSocket(30000);
         
     }   catch (IOException ex) {
             Logger.getLogger(ServidorHospital.class.getName()).log(Level.SEVERE, null, ex);
