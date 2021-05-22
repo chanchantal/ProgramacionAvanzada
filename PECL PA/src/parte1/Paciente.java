@@ -5,24 +5,21 @@ import java.util.concurrent.BrokenBarrierException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+
 /*
--Hay 2000 pacientes. 
--Llegan al hospital y se meten en la cola de recepción
--Los auxiliares comprueban su cita
-    -Si no están citados, se van (el 1%)
--El auxiliar les deriva a un puesto de vacunación
--Los sanitarios les ponen la vacuna
--Acceden a una sala de observación (10 seg)
-    -Si no hay reacción, se van
-    -Si hay reacción, les atiende un sanitario (el 5%)
- */
+*La clase Paciente es un hilo al que le pasamos como atributos la clase EscrituraTexto et, la clase Hospital, un identificador,
+* si tiene cita y el numero de puestos.
+*/
 public class Paciente extends Thread {
     private EscrituraTexto et;
     private final Hospital hospital;
     private String identificador;
     private boolean cita;
     private int puesto;
-
+    /*
+    *En el constructor vamos a crear el identificador del paciente.
+    */
     public Paciente(int id, boolean cita, Hospital hospital, EscrituraTexto et) {
         if (id < 10) {
             identificador = "P000" + id;
@@ -61,8 +58,15 @@ public class Paciente extends Thread {
     public void setPuesto(int puesto) {
         this.puesto = puesto;
     }
-    
 
+    /*
+    *El metodo run() nos muestra las distintas acciones que pueden realizar los pacientes.
+    *Los pacientes llegaran al hospital y se meteran en la cola de recepcion esperando su turno. Los auxiliares comprobaran si 
+    *tienen cita. Si tienen cita el auxiliar les derivara a un puesto de vacunacion , en donde los sanitarios les pondra la vacuna
+    *y posteriormente seras enviados a la sala de observacion .Deberan permanecer durante 10 segundos para observar si
+    *hay reaccion a la vacuna.Solo el 5% tiene reaccion y es atendido por un sanitario.
+    *Si el paciente no tiene cita se ira, en este caso es el 1%.
+    */
     @Override
     public void run() {
         try {

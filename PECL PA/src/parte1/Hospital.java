@@ -1,6 +1,11 @@
 
 package parte1;
 
+
+
+/*
+*La clase Hospital esta compuesta por la clase recepcion, salaDescanso, salaObservacion y salaVacunacion.
+*/
 public class Hospital {
 
     private Recepcion recepcion;

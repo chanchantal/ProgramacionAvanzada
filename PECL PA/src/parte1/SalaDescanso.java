@@ -6,13 +6,11 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import javax.swing.JTextField;
 
-
-    /**
-    * La clase SalaDescanso se encargará de manejar los descansos de los sanitarios
-    * y de los auxiliares, así como el paso por el vestidor de los sanitarios
-    * antes de entrar a trabajar 
-    */
-
+/**
+ * La clase SalaDescanso se encargará de manejar los descansos de los sanitarios
+ * y de los auxiliares, así como el paso por el vestidor de los sanitarios antes
+ * de entrar a trabajar
+ */
 public class SalaDescanso {
 
     private final EscrituraTexto et;
@@ -31,23 +29,23 @@ public class SalaDescanso {
     private final javax.swing.JTextField colaDescansoTxtAux;
 
     /**
-    * En el constructor inicializamos los JTextField necesarios para poder poner 
-    * en funcionamiento la interfaz, así como la clase de EscrituraTexto, que
-    * se encargará de rellenar el log 
+     * En el constructor inicializamos los JTextField necesarios para poder
+     * poner en funcionamiento la interfaz, así como la clase de EscrituraTexto,
+     * que se encargará de rellenar el log
      */
     public SalaDescanso(JTextField colaDescansoTxtSan, JTextField colaDescansoTxtAux, EscrituraTexto et) {
         this.colaDescansoTxtSan = colaDescansoTxtSan;
         this.colaDescansoTxtAux = colaDescansoTxtAux;
-        this.et=et;
+        this.et = et;
         vacunar = new ArrayList<>(10);
     }
 
-    
     /**
-    * El método vestidorSanitario hará que el Sanitario vaya a la sala de descanso
-    * al entrar a trabajar. Se añade a una cola de descanso de sanitarios, imprimirá
-    * dicha cola por la interfaz y al salir, la imprimirá de nuevo para actualizarla
-    */
+     * El método vestidorSanitario hará que el Sanitario vaya a la sala de
+     * descanso al entrar a trabajar. Se añade a una cola de descanso de
+     * sanitarios, imprimirá dicha cola por la interfaz y al salir, la imprimirá
+     * de nuevo para actualizarla
+     */
     public void vestidorSanitario(Sanitario s) throws InterruptedException {
         lockVestidor.lock();
         try {
@@ -60,12 +58,13 @@ public class SalaDescanso {
             lockVestidor.unlock();
         }
     }
-    
+
     /**
-    * El método descansoSanitario se encargará de manejar los descansos de los sanitarios
-    * cada vez que administren las vacunas dichas en el enunciado. Añade de nuevo los
-    * sanitarios a la cola de descansoS, hacen su descanso, y salen. 
-    */
+     * El método descansoSanitario se encargará de manejar los descansos de los
+     * sanitarios cada vez que administren las vacunas dichas en el enunciado.
+     * Añade de nuevo los sanitarios a la cola de descansoS, hacen su descanso,
+     * y salen.
+     */
     public boolean descansoSanitario(Sanitario s) throws InterruptedException {
         lock.lock();
         try {
@@ -85,17 +84,17 @@ public class SalaDescanso {
     }
 
     /**
-    * El método descansoAuxiliar1 se encargará de manejar el descanso del auxiliar 1
-    * cada vez que registre a los pacientes dichos en el enucniado. Añade al auxiliar 1
-    * a su cola de descanso, hacen su descanso, y salen.
-    */
+     * El método descansoAuxiliar1 se encargará de manejar el descanso del
+     * auxiliar 1 cada vez que registre a los pacientes dichos en el enucniado.
+     * Añade al auxiliar 1 a su cola de descanso, hacen su descanso, y salen.
+     */
     public void descansoAuxiliar1(Auxiliar a) throws InterruptedException {
         lock.lock();
         try {
             descansoA.add(a);
             et.inicioDescansoA(a);
             imprimirColaDescansoAuxiliar();
-            Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000))); 
+            Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
             descansoA.remove(a);
             imprimirColaDescansoAuxiliar();
             et.finDescansoA(a);
@@ -105,10 +104,10 @@ public class SalaDescanso {
     }
 
     /**
-    * El método descansoAuxiliar2 se encargará de manejar el descanso del auxiliar 2
-    * cada vez que prepare las vacunas dichas en el enucniado. Añade al auxiliar 2
-    * a su cola de descanso, hacen su descanso, y salen.
-    */
+     * El método descansoAuxiliar2 se encargará de manejar el descanso del
+     * auxiliar 2 cada vez que prepare las vacunas dichas en el enucniado. Añade
+     * al auxiliar 2 a su cola de descanso, hacen su descanso, y salen.
+     */
     public void descansoAuxiliar2(Auxiliar a) throws InterruptedException {
         lock.lock();
         try {
@@ -125,9 +124,9 @@ public class SalaDescanso {
     }
 
     /**
-    * El método imprimirColaDescansoAuxiliar se encarga de mostrar por pantalla
-    * la cola de descanso de los auxiliares en la interfaz
-    */
+     * El método imprimirColaDescansoAuxiliar se encarga de mostrar por pantalla
+     * la cola de descanso de los auxiliares en la interfaz
+     */
     private synchronized void imprimirColaDescansoAuxiliar() {
         String texto1 = "";
         if (!descansoA.isEmpty()) {
@@ -137,11 +136,11 @@ public class SalaDescanso {
         }
         colaDescansoTxtAux.setText(texto1);
     }
-    
+
     /**
-    * El método imprimirColaDescansoSanitario se encarga de mostrar por pantalla
-    * la cola de descanso de los sanitarios en la interfaz. 
-    */
+     * El método imprimirColaDescansoSanitario se encarga de mostrar por
+     * pantalla la cola de descanso de los sanitarios en la interfaz.
+     */
     private synchronized void imprimirColaDescansoSanitario() {
         String texto = "";
         if (!descansoS.isEmpty()) {
@@ -152,4 +151,15 @@ public class SalaDescanso {
         colaDescansoTxtSan.setText(texto);
     }
 
+    public String getColaDescansoTxtSan() {
+        return colaDescansoTxtSan.getText();
+    }
+
+    public String getColaDescansoTxtAux() {
+        return colaDescansoTxtAux.getText();
+    }
+
+
+     
+    
 }

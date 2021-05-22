@@ -4,16 +4,12 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+
 /*
--Hay 2 auxiliares. A1 y A2
--A1 comprueba que los pacientes tienen cita (0,5-1 seg)
--Si tienen cita, comprueba el aforo de salas y envía al paciente.
-    -Si está lleno, esperan
--Cuando registre a 10 pacientes, descansa (3-5 seg);
--Lleva un registro de vacunación y de errores. 
--A2 mete en cola las dosis de vacuna que prepara (prepara una en 0.5-1 seg)
--Cuando prepara 20 vacunas, descansa (1-4 seg)
- */
+*La clase Auxiliar es un hilo al que le pasamos el identificador y la clase Hospital.
+*En dicha clase podemos observar el funcionamiento de los auxiliares.
+*/
 public class Auxiliar extends Thread {
 
     private String identificador;
@@ -32,19 +28,25 @@ public class Auxiliar extends Thread {
     public void setIdentificador(String identificador) {
         this.identificador = identificador;
     }
-
+    /*
+    *El metodo run se encargara de comprobar que funciones hacen cada uno de los auxiliares existentes que diferenciamos segun su identificador.
+    *Si el auxiliar tiene identificador A1 entonces dicho auxiliar se encuentra en la recepcion, en donde comprueba que
+    *los pacientes tienen cita (0,5-1 seg).En caso afirmativo, comprueba el aforo de salas y envía al paciente a la sala correpondiente.
+    *Tambien al acabar de registrar a 10 pacientes, descansa (3-5 seg).
+    *Sino, si el auxiliar tiene identificador A2 mete en cola las dosis de vacuna que prepara (prepara una en 0.5-1 seg).
+    *Posteriormente al acabar de preparar 20 vacunas, descansa (1-4 seg).
+    */
     @Override
     public void run() {
         try {
             while (true) {
                 if ("A1".equals(identificador)) {
                     //Este es el run de recepcion
-
                     hospital.getRecepcion().auxiliarRegistra(this);
                     hospital.getSalaDescanso().descansoAuxiliar1(this);
 
                 } else {
-                    //este es el run de vacunas para A2
+                    //Este es el run de vacunas para A2
                     hospital.getSalaVacunacion().haciendoVacunas(this);
                     hospital.getSalaDescanso().descansoAuxiliar2(this);
 
@@ -57,22 +59,4 @@ public class Auxiliar extends Thread {
     }
 }
 
-//    public void salir(Paciente p) throws InterruptedException {
-//        lock.lock();
-//        boolean cita = true;
-//        int comprobacion = (int) (Math.random() * (100 - 1 + 1) + 1);
-//        if (comprobacion == 1) {
-//            cita = false;
-//            System.out.println("El paciente no tiene cita y procede a marcharse");
-//        } else {
-//            try {
-//                colaRecepcion.remove(p);
-//                recepcion.signalAll();
-//                System.out.println("El paciente se va a la sala de Vacunación");
-//                paraVacunar.add(p);
-//            } finally {
-//                lock.unlock();
-//            }
-//        }
-//
-//    }
+

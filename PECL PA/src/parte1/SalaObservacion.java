@@ -332,4 +332,91 @@ public class SalaObservacion {
                 break;
         }
     }
+
+    public String getPuesto1Txt() {
+        return puesto1Txt.getText();
+    }
+
+    public String getPuesto2Txt() {
+        return puesto2Txt.getText();
+    }
+
+    public String getPuesto3Txt() {
+        return puesto3Txt.getText();
+    }
+
+    public String getPuesto4Txt() {
+        return puesto4Txt.getText();
+    }
+
+    public String getPuesto5Txt() {
+        return puesto5Txt.getText();
+    }
+
+    public String getPuesto6Txt() {
+        return puesto6Txt.getText();
+    }
+
+    public String getPuesto7Txt() {
+        return puesto7Txt.getText();
+    }
+
+    public String getPuesto8Txt() {
+        return puesto8Txt.getText();
+    }
+
+    public String getPuesto9Txt() {
+        return puesto9Txt.getText();
+    }
+
+    public String getPuesto10Txt() {
+        return puesto10Txt.getText();
+    }
+
+    public String getPuesto11Txt() {
+        return puesto11Txt.getText();
+    }
+
+    public String getPuesto12Txt() {
+        return puesto12Txt.getText();
+    }
+
+    public String getPuesto13Txt() {
+        return puesto13Txt.getText();
+    }
+
+    public String getPuesto14Txt() {
+        return puesto14Txt.getText();
+    }
+
+    public String getPuesto15Txt() {
+        return puesto15Txt.getText();
+    }
+
+    public String getPuesto16Txt() {
+        return puesto16Txt.getText();
+    }
+
+    public String getPuesto17Txt() {
+        return puesto17Txt.getText();
+    }
+
+    public String getPuesto18Txt() {
+        return puesto18Txt.getText();
+    }
+
+    public String getPuesto19Txt() {
+        return puesto19Txt.getText();
+    }
+
+    public String getPuesto20Txt() {
+        return puesto20Txt.getText();
+    }
+
+    public int getPuestoPaciente() {
+        return puestoPaciente.length;
+    }
+
+
+    
 }

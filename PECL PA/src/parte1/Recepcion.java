@@ -146,8 +146,13 @@ public class Recepcion {
     public String getColaEspera() {
         return colaEsperaTxt.getText();
     }
-
     
+    public String getPacienteTxt() {
+        return pacienteTxt.getText();
+    }
+    public String getAuxiliarTxt() {
+        return auxiliarTxt.getText();
+    }
     
     
 }

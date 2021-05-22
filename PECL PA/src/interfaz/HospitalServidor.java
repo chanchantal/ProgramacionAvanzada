@@ -24,11 +24,12 @@ public class HospitalServidor extends JFrame {
      */
     public HospitalServidor() {
 
-        
+       
         initComponents();
         
-        ClienteHilo cl = new ClienteHilo(jTextFieldColaEspera);
+        ClienteHilo cl = new ClienteHilo(jTextFieldColaEspera,jTextFieldPaciente,jTextFieldAuxiliarR,jTextFieldSalaDescanso2,jTextFieldSalaDescanso1,jTextFieldauxiliarV,jTextFieldvacunasDisponibles,jTextFieldPuestoV1,jTextFieldPuestoV2,jTextFieldPuestoV3,jTextFieldPuestoV4,jTextFieldPuestoV5,jTextFieldPuestoV6,jTextFieldPuestoV7,jTextFieldPuestoV8,jTextFieldPuestoV9,jTextFieldPuestoV10,jTextFieldPuestoO1,jTextFieldPuestoO2,jTextFieldPuestoO3,jTextFieldPuestoO4,jTextFieldPuestoO5,jTextFieldPuestoO6,jTextFieldPuestoO7,jTextFieldPuestoO8,jTextFieldPuestoO9,jTextFieldPuestoO10,jTextFieldPuestoO11,jTextFieldPuestoO12,jTextFieldPuestoO13,jTextFieldPuestoO14,jTextFieldPuestoO15,jTextFieldPuestoO16,jTextFieldPuestoO17,jTextFieldPuestoO18,jTextFieldPuestoO19,jTextFieldPuestoO20);
         cl.start();
+                                       
         
         
 

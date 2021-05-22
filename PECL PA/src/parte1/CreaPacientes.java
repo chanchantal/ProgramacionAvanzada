@@ -5,6 +5,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+/*
+*El hilo CreaPaciente tiene como atributos el hospital perteneciente a la clase Hospital y et perteneciente a la clase EscrituraTexto.
+*Dicho hilo se encarga de generar los 2000 pacientes.
+*/
 public class CreaPacientes extends Thread{
     private final Hospital hospital;
     private final EscrituraTexto et;
@@ -14,7 +18,10 @@ public class CreaPacientes extends Thread{
         this.hospital = hospital;
         this.et = et;
     }
-    
+    /*
+    *El metodo run() recorre los 2001 pacientes y compruba que cada uno de ellos tenga cita.
+    *Para evitar aglomeracione dicha accion se realizara en un intervalo de tiempo entre 1 y 3 segundos.
+    */
     @Override
     public void run(){
         for (int i = 1; i < 2001 ; i++){

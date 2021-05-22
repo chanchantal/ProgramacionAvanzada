@@ -430,4 +430,56 @@ public class SalaVacunacion {
         }
 
     }
+
+    public String getPuesto1Txt() {
+        return puesto1Txt.getText();
+    }
+
+    public String getPuesto2Txt() {
+        return puesto2Txt.getText();
+    }
+
+    public String getPuesto3Txt() {
+        return puesto3Txt.getText();
+    }
+
+    public String getPuesto4Txt() {
+        return puesto4Txt.getText();
+    }
+
+    public String  getPuesto5Txt() {
+        return puesto5Txt.getText();
+    }
+
+    public String  getPuesto6Txt() {
+        return puesto6Txt.getText();
+    }
+
+    public String  getPuesto7Txt() {
+        return puesto7Txt.getText();
+    }
+
+    public String getPuesto8Txt() {
+        return puesto8Txt.getText();
+    }
+
+    public String getPuesto9Txt() {
+        return puesto9Txt.getText();
+    }
+
+    public String getPuesto10Txt() {
+        return puesto10Txt.getText();
+    }
+
+    public String getAuxiliarTxt() {
+        return auxiliarTxt.getText();
+    }
+
+    public int VacunasDisponibles() {
+        return colaVacunas.size();
+    }
+
+
+    
+    
 }
