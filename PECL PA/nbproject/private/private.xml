@@ -3,20 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ctati/OneDrive/Desktop/UNIVERSIDAD/Segundo/Prog.%20Avanzada/PRACTICA/ProgramacionAvanzada/ProgramacionAvanzada/PECL%20PA/src/interfaz/interfaz.java</file>
-            <file>file:/C:/Users/ctati/OneDrive/Desktop/UNIVERSIDAD/Segundo/Prog.%20Avanzada/PRACTICA/ProgramacionAvanzada/ProgramacionAvanzada/PECL%20PA/src/parte1/SalaVacunacion.java</file>
-            <file>file:/C:/Users/ctati/OneDrive/Desktop/UNIVERSIDAD/Segundo/Prog.%20Avanzada/PRACTICA/ProgramacionAvanzada/ProgramacionAvanzada/PECL%20PA/src/parte1/CreaPacientes.java</file>
-            <file>file:/C:/Users/ctati/OneDrive/Desktop/UNIVERSIDAD/Segundo/Prog.%20Avanzada/PRACTICA/ProgramacionAvanzada/ProgramacionAvanzada/PECL%20PA/src/interfaz/HospitalServidor.java</file>
-            <file>file:/C:/Users/ctati/OneDrive/Desktop/UNIVERSIDAD/Segundo/Prog.%20Avanzada/PRACTICA/ProgramacionAvanzada/ProgramacionAvanzada/PECL%20PA/src/parte1/Auxiliar.java</file>
-            <file>file:/C:/Users/ctati/OneDrive/Desktop/UNIVERSIDAD/Segundo/Prog.%20Avanzada/PRACTICA/ProgramacionAvanzada/ProgramacionAvanzada/PECL%20PA/src/parte1/Sanitario.java</file>
-            <file>file:/C:/Users/ctati/OneDrive/Desktop/UNIVERSIDAD/Segundo/Prog.%20Avanzada/PRACTICA/ProgramacionAvanzada/ProgramacionAvanzada/PECL%20PA/src/parte1/Recepcion.java</file>
-            <file>file:/C:/Users/ctati/OneDrive/Desktop/UNIVERSIDAD/Segundo/Prog.%20Avanzada/PRACTICA/ProgramacionAvanzada/ProgramacionAvanzada/PECL%20PA/src/parte1/Paciente.java</file>
+            <file>file:/C:/Users/ctati/OneDrive/Desktop/UNIVERSIDAD/Segundo/Prog.%20Avanzada/PRACTICA/ProgramacionAvanzada/ProgramacionAvanzada/PECL%20PA/src/interfaz/InterfazHospital.java</file>
             <file>file:/C:/Users/ctati/OneDrive/Desktop/UNIVERSIDAD/Segundo/Prog.%20Avanzada/PRACTICA/ProgramacionAvanzada/ProgramacionAvanzada/PECL%20PA/src/interfaz/ClienteHilo.java</file>
-            <file>file:/C:/Users/ctati/OneDrive/Desktop/UNIVERSIDAD/Segundo/Prog.%20Avanzada/PRACTICA/ProgramacionAvanzada/ProgramacionAvanzada/PECL%20PA/src/parte1/SalaObservacion.java</file>
-            <file>file:/C:/Users/ctati/OneDrive/Desktop/UNIVERSIDAD/Segundo/Prog.%20Avanzada/PRACTICA/ProgramacionAvanzada/ProgramacionAvanzada/PECL%20PA/src/parte1/EscrituraTexto.java</file>
-            <file>file:/C:/Users/ctati/OneDrive/Desktop/UNIVERSIDAD/Segundo/Prog.%20Avanzada/PRACTICA/ProgramacionAvanzada/ProgramacionAvanzada/PECL%20PA/src/parte1/SalaDescanso.java</file>
-            <file>file:/C:/Users/ctati/OneDrive/Desktop/UNIVERSIDAD/Segundo/Prog.%20Avanzada/PRACTICA/ProgramacionAvanzada/ProgramacionAvanzada/PECL%20PA/src/parte1/Hospital.java</file>
-            <file>file:/C:/Users/ctati/OneDrive/Desktop/UNIVERSIDAD/Segundo/Prog.%20Avanzada/PRACTICA/ProgramacionAvanzada/ProgramacionAvanzada/PECL%20PA/src/parte1/ServidorHospital.java</file>
+            <file>file:/C:/Users/ctati/OneDrive/Desktop/UNIVERSIDAD/Segundo/Prog.%20Avanzada/PRACTICA/ProgramacionAvanzada/ProgramacionAvanzada/PECL%20PA/src/interfaz/HospitalServidor.java</file>
         </group>
     </open-files>
 </project-private>

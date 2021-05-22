@@ -91,7 +91,7 @@ public class Paciente extends Thread {
                 hospital.getSalaObservacion().puesto(this);
                 hospital.getSalaObservacion().salir(this);
             }else{
-                System.out.println("El paciente " + this + " ha acudido sin cita");
+                System.out.println("El paciente " + identificador + " ha acudido sin cita");
                 et.pacienteSinCita(this);
                 hospital.getRecepcion().salir(this);
                 
