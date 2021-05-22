@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package interfaz;
 
 import java.io.DataInputStream;
@@ -11,15 +7,13 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.concurrent.BrokenBarrierException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
-import parte1.Sanitario;
+
 
 /**
- *
- * @author Usuario
+ * La clase ClienteHilo nos permitirá manejarnos como clientes en función del servidor
  */
 public class ClienteHilo extends Thread {
 
@@ -102,9 +96,12 @@ public class ClienteHilo extends Thread {
         this.puesto20O = puesto20O;
     }
 
+    /**
+     * El método run llama a los demás métodos implementados en este cliente y le 
+     * asigna el tiempo de 1 segundo que se pide en el enunciado
+     */
     @Override
     public void run() {
-        System.out.println("che inisia");
         while (true) {
             try {
 
@@ -121,6 +118,10 @@ public class ClienteHilo extends Thread {
         }
     }
 
+    /**
+     * imprimirColaEspera será el método encargado de imprimir todo lo relacionado 
+     * con la recepción del programa. 
+     */
     public void imprimirColaEspera() {
         Socket servi;
         DataInputStream entrada;
@@ -137,7 +138,7 @@ public class ClienteHilo extends Thread {
             salida.writeInt(1);
 
             textoCola = entrada.readUTF();
-            System.out.println("entro bien");
+           
             colaEspera.setText(textoCola);
             textoPaciente = entrada.readUTF();
             pacienteTxt.setText(textoPaciente);
@@ -153,6 +154,11 @@ public class ClienteHilo extends Thread {
         }
     }
 
+    /**
+     * imprimirColaDescanso será el método encargado de imprimir todo lo relacionado
+     * con la clase SalaDescanso
+     * @throws IOException 
+     */
     private void imprimirColaDescanso() throws IOException {
         Socket servi;
         DataInputStream entrada;
@@ -179,6 +185,11 @@ public class ClienteHilo extends Thread {
         }
     }
 
+    /**
+     * imprimirPuestosVacunación será el método encargado de imprimir todo lo
+     * relacionado con la clase SalaVacunación
+     * @throws IOException 
+     */
     private void imprimirPuestosVacunacion() throws IOException {
         Socket servi;
         DataInputStream entrada;
@@ -236,6 +247,11 @@ public class ClienteHilo extends Thread {
         }
     }
 
+    /**
+     * imprimirPuestosObservacion será el método encargado de imprimir todo lo
+     * relacionado con la clase SalaObservación
+     * @throws IOException 
+     */
     private void imprimirPuestosObservacion() throws IOException {
         Socket servi;
         DataInputStream entrada;

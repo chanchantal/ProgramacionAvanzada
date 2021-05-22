@@ -5,34 +5,27 @@
  */
 package interfaz;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.net.InetAddress;
+import java.net.Socket;
 import javax.swing.JFrame;
 
-
 /**
- *
- * @author ctati
+ * En la clase-interfaz HospitalServidor implementaremos los sockets para poder
+ * cerrar los puestos de vacunación cuando se pida
+ * @author Usuario
  */
 public class HospitalServidor extends JFrame {
 
-
-
-    /**
-     * Creates new form HospitalServidor
-     */
     public HospitalServidor() {
-
-       
+ 
         initComponents();
         
         ClienteHilo cl = new ClienteHilo(jTextFieldColaEspera,jTextFieldPaciente,jTextFieldAuxiliarR,jTextFieldSalaDescanso2,jTextFieldSalaDescanso1,jTextFieldauxiliarV,jTextFieldvacunasDisponibles,jTextFieldPuestoV1,jTextFieldPuestoV2,jTextFieldPuestoV3,jTextFieldPuestoV4,jTextFieldPuestoV5,jTextFieldPuestoV6,jTextFieldPuestoV7,jTextFieldPuestoV8,jTextFieldPuestoV9,jTextFieldPuestoV10,jTextFieldPuestoO1,jTextFieldPuestoO2,jTextFieldPuestoO3,jTextFieldPuestoO4,jTextFieldPuestoO5,jTextFieldPuestoO6,jTextFieldPuestoO7,jTextFieldPuestoO8,jTextFieldPuestoO9,jTextFieldPuestoO10,jTextFieldPuestoO11,jTextFieldPuestoO12,jTextFieldPuestoO13,jTextFieldPuestoO14,jTextFieldPuestoO15,jTextFieldPuestoO16,jTextFieldPuestoO17,jTextFieldPuestoO18,jTextFieldPuestoO19,jTextFieldPuestoO20);
         cl.start();
-                                       
-        
-        
-
+           
     }
 
     /**
@@ -82,16 +75,16 @@ public class HospitalServidor extends JFrame {
         jTextFieldPuestoV10 = new javax.swing.JTextField();
         jTextFieldauxiliarV = new javax.swing.JTextField();
         jTextFieldvacunasDisponibles = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        cerrar1 = new javax.swing.JButton();
+        cerrar2 = new javax.swing.JButton();
+        cerrar3 = new javax.swing.JButton();
+        cerrar4 = new javax.swing.JButton();
+        cerrar5 = new javax.swing.JButton();
+        cerrar6 = new javax.swing.JButton();
+        cerrar7 = new javax.swing.JButton();
+        cerrar8 = new javax.swing.JButton();
+        cerrar9 = new javax.swing.JButton();
+        cerrar10 = new javax.swing.JButton();
         jPanelSalaObservacion = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
@@ -373,40 +366,85 @@ public class HospitalServidor extends JFrame {
         });
         jPanelSalaVacunacion.add(jTextFieldvacunasDisponibles, new org.netbeans.lib.awtextra.AbsoluteConstraints(707, 115, 77, -1));
 
-        jButton1.setText("Cerrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cerrar1.setText("Cerrar");
+        cerrar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cerrar1ActionPerformed(evt);
             }
         });
-        jPanelSalaVacunacion.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        jPanelSalaVacunacion.add(cerrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
-        jButton2.setText("Cerrar");
-        jPanelSalaVacunacion.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, -1, -1));
+        cerrar2.setText("Cerrar");
+        cerrar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrar2ActionPerformed(evt);
+            }
+        });
+        jPanelSalaVacunacion.add(cerrar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, -1, -1));
 
-        jButton3.setText("Cerrar");
-        jPanelSalaVacunacion.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, -1, -1));
+        cerrar3.setText("Cerrar");
+        cerrar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrar3ActionPerformed(evt);
+            }
+        });
+        jPanelSalaVacunacion.add(cerrar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, -1, -1));
 
-        jButton4.setText("Cerrar");
-        jPanelSalaVacunacion.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, -1, -1));
+        cerrar4.setText("Cerrar");
+        cerrar4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrar4ActionPerformed(evt);
+            }
+        });
+        jPanelSalaVacunacion.add(cerrar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, -1, -1));
 
-        jButton5.setText("Cerrar");
-        jPanelSalaVacunacion.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, -1, -1));
+        cerrar5.setText("Cerrar");
+        cerrar5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrar5ActionPerformed(evt);
+            }
+        });
+        jPanelSalaVacunacion.add(cerrar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, -1, -1));
 
-        jButton6.setText("Cerrar");
-        jPanelSalaVacunacion.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+        cerrar6.setText("Cerrar");
+        cerrar6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrar6ActionPerformed(evt);
+            }
+        });
+        jPanelSalaVacunacion.add(cerrar6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
-        jButton7.setText("Cerrar");
-        jPanelSalaVacunacion.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, -1, -1));
+        cerrar7.setText("Cerrar");
+        cerrar7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrar7ActionPerformed(evt);
+            }
+        });
+        jPanelSalaVacunacion.add(cerrar7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, -1, -1));
 
-        jButton8.setText("Cerrar");
-        jPanelSalaVacunacion.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, -1));
+        cerrar8.setText("Cerrar");
+        cerrar8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrar8ActionPerformed(evt);
+            }
+        });
+        jPanelSalaVacunacion.add(cerrar8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, -1));
 
-        jButton9.setText("Cerrar");
-        jPanelSalaVacunacion.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, -1, -1));
+        cerrar9.setText("Cerrar");
+        cerrar9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrar9ActionPerformed(evt);
+            }
+        });
+        jPanelSalaVacunacion.add(cerrar9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, -1, -1));
 
-        jButton10.setText("Cerrar");
-        jPanelSalaVacunacion.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 170, -1, -1));
+        cerrar10.setText("Cerrar");
+        cerrar10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrar10ActionPerformed(evt);
+            }
+        });
+        jPanelSalaVacunacion.add(cerrar10, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 170, -1, -1));
 
         jPanelSalaObservacion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -597,11 +635,222 @@ public class HospitalServidor extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldPuestoO16ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    /**
+     * Los botones de cerrar puesto llamarán a la salida correspondiente del servidor
+     * para frenar su ejecución y mandar a los sanitarios a la sala de descanso. 
+     * Los siguientes 9 métodos cumplen la misma función, cambiando el puesto. 
+     */
+    private void cerrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar1ActionPerformed
+        Socket servi;
+        DataInputStream entrada;
+        DataOutputStream salida;
 
+        try {
+            servi = new Socket(InetAddress.getLocalHost(), 30000);
+            entrada = new DataInputStream(servi.getInputStream());
+            salida = new DataOutputStream(servi.getOutputStream());
+
+            salida.writeInt(5);
+
+            entrada.close(); //Cerramos los flujos de entrada y salida
+            salida.close();
+            servi.close(); //Cerramos la conexión
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
         
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_cerrar1ActionPerformed
+
+    private void cerrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar2ActionPerformed
+        Socket servi;
+        DataInputStream entrada;
+        DataOutputStream salida;
+
+        try {
+            servi = new Socket(InetAddress.getLocalHost(), 30000);
+            entrada = new DataInputStream(servi.getInputStream());
+            salida = new DataOutputStream(servi.getOutputStream());
+
+            salida.writeInt(6);
+
+            entrada.close(); //Cerramos los flujos de entrada y salida
+            salida.close();
+            servi.close(); //Cerramos la conexión
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_cerrar2ActionPerformed
+
+    private void cerrar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar3ActionPerformed
+        Socket servi;
+        DataInputStream entrada;
+        DataOutputStream salida;
+
+        try {
+            servi = new Socket(InetAddress.getLocalHost(), 30000);
+            entrada = new DataInputStream(servi.getInputStream());
+            salida = new DataOutputStream(servi.getOutputStream());
+
+            salida.writeInt(7);
+
+            entrada.close(); //Cerramos los flujos de entrada y salida
+            salida.close();
+            servi.close(); //Cerramos la conexión
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_cerrar3ActionPerformed
+
+    private void cerrar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar4ActionPerformed
+        Socket servi;
+        DataInputStream entrada;
+        DataOutputStream salida;
+
+        try {
+            servi = new Socket(InetAddress.getLocalHost(), 30000);
+            entrada = new DataInputStream(servi.getInputStream());
+            salida = new DataOutputStream(servi.getOutputStream());
+
+            salida.writeInt(8);
+
+            entrada.close(); //Cerramos los flujos de entrada y salida
+            salida.close();
+            servi.close(); //Cerramos la conexión
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_cerrar4ActionPerformed
+
+    private void cerrar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar5ActionPerformed
+        Socket servi;
+        DataInputStream entrada;
+        DataOutputStream salida;
+
+        try {
+            servi = new Socket(InetAddress.getLocalHost(), 30000);
+            entrada = new DataInputStream(servi.getInputStream());
+            salida = new DataOutputStream(servi.getOutputStream());
+
+            salida.writeInt(9);
+
+            entrada.close(); //Cerramos los flujos de entrada y salida
+            salida.close();
+            servi.close(); //Cerramos la conexión
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_cerrar5ActionPerformed
+
+    private void cerrar6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar6ActionPerformed
+        Socket servi;
+        DataInputStream entrada;
+        DataOutputStream salida;
+
+        try {
+            servi = new Socket(InetAddress.getLocalHost(), 30000);
+            entrada = new DataInputStream(servi.getInputStream());
+            salida = new DataOutputStream(servi.getOutputStream());
+
+            salida.writeInt(10);
+
+            entrada.close(); //Cerramos los flujos de entrada y salida
+            salida.close();
+            servi.close(); //Cerramos la conexión
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_cerrar6ActionPerformed
+
+    private void cerrar7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar7ActionPerformed
+        Socket servi;
+        DataInputStream entrada;
+        DataOutputStream salida;
+
+        try {
+            servi = new Socket(InetAddress.getLocalHost(), 30000);
+            entrada = new DataInputStream(servi.getInputStream());
+            salida = new DataOutputStream(servi.getOutputStream());
+
+            salida.writeInt(11);
+
+            entrada.close(); //Cerramos los flujos de entrada y salida
+            salida.close();
+            servi.close(); //Cerramos la conexión
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_cerrar7ActionPerformed
+
+    private void cerrar8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar8ActionPerformed
+        Socket servi;
+        DataInputStream entrada;
+        DataOutputStream salida;
+
+        try {
+            servi = new Socket(InetAddress.getLocalHost(), 30000);
+            entrada = new DataInputStream(servi.getInputStream());
+            salida = new DataOutputStream(servi.getOutputStream());
+
+            salida.writeInt(12);
+
+            entrada.close(); //Cerramos los flujos de entrada y salida
+            salida.close();
+            servi.close(); //Cerramos la conexión
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_cerrar8ActionPerformed
+
+    private void cerrar9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar9ActionPerformed
+        Socket servi;
+        DataInputStream entrada;
+        DataOutputStream salida;
+
+        try {
+            servi = new Socket(InetAddress.getLocalHost(), 30000);
+            entrada = new DataInputStream(servi.getInputStream());
+            salida = new DataOutputStream(servi.getOutputStream());
+
+            salida.writeInt(13);
+
+            entrada.close(); //Cerramos los flujos de entrada y salida
+            salida.close();
+            servi.close(); //Cerramos la conexión
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_cerrar9ActionPerformed
+
+    private void cerrar10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar10ActionPerformed
+        Socket servi;
+        DataInputStream entrada;
+        DataOutputStream salida;
+
+        try {
+            servi = new Socket(InetAddress.getLocalHost(), 30000);
+            entrada = new DataInputStream(servi.getInputStream());
+            salida = new DataOutputStream(servi.getOutputStream());
+
+            salida.writeInt(14);
+
+            entrada.close(); //Cerramos los flujos de entrada y salida
+            salida.close();
+            servi.close(); //Cerramos la conexión
+            
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_cerrar10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -639,16 +888,16 @@ public class HospitalServidor extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton cerrar1;
+    private javax.swing.JButton cerrar10;
+    private javax.swing.JButton cerrar2;
+    private javax.swing.JButton cerrar3;
+    private javax.swing.JButton cerrar4;
+    private javax.swing.JButton cerrar5;
+    private javax.swing.JButton cerrar6;
+    private javax.swing.JButton cerrar7;
+    private javax.swing.JButton cerrar8;
+    private javax.swing.JButton cerrar9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

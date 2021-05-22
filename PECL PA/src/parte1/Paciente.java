@@ -7,18 +7,22 @@ import java.util.logging.Logger;
 
 
 
-/*
+/**
 *La clase Paciente es un hilo al que le pasamos como atributos la clase EscrituraTexto et, la clase Hospital, un identificador,
 * si tiene cita y el numero de puestos.
 */
 public class Paciente extends Thread {
-    private EscrituraTexto et;
+    private final EscrituraTexto et;
     private final Hospital hospital;
     private String identificador;
     private boolean cita;
     private int puesto;
-    /*
+    /**
     *En el constructor vamos a crear el identificador del paciente.
+     * @param id
+     * @param cita
+     * @param hospital
+     * @param et
     */
     public Paciente(int id, boolean cita, Hospital hospital, EscrituraTexto et) {
         if (id < 10) {
@@ -34,7 +38,10 @@ public class Paciente extends Thread {
         this.hospital = hospital;
         this.et = et;
     }
-
+    
+    /**
+     * Creamos los métodos setter y getter para poder acceder al identificador¡
+     */
     public String getIdentificador() {
         return identificador;
     }
@@ -59,7 +66,7 @@ public class Paciente extends Thread {
         this.puesto = puesto;
     }
 
-    /*
+    /**
     *El metodo run() nos muestra las distintas acciones que pueden realizar los pacientes.
     *Los pacientes llegaran al hospital y se meteran en la cola de recepcion esperando su turno. Los auxiliares comprobaran si 
     *tienen cita. Si tienen cita el auxiliar les derivara a un puesto de vacunacion , en donde los sanitarios les pondra la vacuna

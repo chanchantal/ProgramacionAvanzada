@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-
 /*
 *La clase Auxiliar es un hilo al que le pasamos el identificador y la clase Hospital.
 *En dicha clase podemos observar el funcionamiento de los auxiliares.
@@ -16,11 +14,20 @@ public class Auxiliar extends Thread {
     private final Hospital hospital;
 
 
+    /**
+     * en el constructor, fijaremos su identificador
+     * @param id
+     * @param hospital
+     */
     public Auxiliar(int id, Hospital hospital) {
         identificador = "A" + id;
         this.hospital = hospital;
     }
 
+    /**
+     * Creamos los métodos setter y getter para poder acceder al identificador¡
+     * @return 
+     */
     public String getIdentificador() {
         return identificador;
     }
@@ -28,7 +35,8 @@ public class Auxiliar extends Thread {
     public void setIdentificador(String identificador) {
         this.identificador = identificador;
     }
-    /*
+    
+    /**
     *El metodo run se encargara de comprobar que funciones hacen cada uno de los auxiliares existentes que diferenciamos segun su identificador.
     *Si el auxiliar tiene identificador A1 entonces dicho auxiliar se encuentra en la recepcion, en donde comprueba que
     *los pacientes tienen cita (0,5-1 seg).En caso afirmativo, comprueba el aforo de salas y envía al paciente a la sala correpondiente.

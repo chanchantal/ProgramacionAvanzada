@@ -9,16 +9,26 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import javax.swing.JTextField;
 
-
 /**
-* En la clase SalaVacunacion el paciente entrará, irá a un puesto aleatorio, y el
-* Sanitario se encargará de vacunarle. Por otra parte, el Auxiliar 2 estará en todo
-* momento haciendo vacunas para los sanitarios. 
+ * En la clase SalaVacunacion el paciente entrará, irá a un puesto aleatorio, y
+ * el Sanitario se encargará de vacunarle. Por otra parte, el Auxiliar 2 estará
+ * en todo momento haciendo vacunas para los sanitarios.
  */
 public class SalaVacunacion {
 
     private final EscrituraTexto et;
     private Paciente paciente;
+    private boolean cerrado1 = false;
+    private boolean cerrado2 = false;
+    private boolean cerrado3 = false;
+    private boolean cerrado4 = false;
+    private boolean cerrado5 = false;
+    private boolean cerrado6 = false;
+    private boolean cerrado7 = false;
+    private boolean cerrado8 = false;
+    private boolean cerrado9 = false;
+    private boolean cerrado10 = false;
+    
 
     private final javax.swing.JTextField puesto1Txt;
     private final javax.swing.JTextField puesto2Txt;
@@ -71,9 +81,9 @@ public class SalaVacunacion {
     private final Semaphore puesto10s = new Semaphore(0);
 
     /**
-    * En el constructor inicializamos los JTextField necesarios para poder poner 
-    * en funcionamiento la interfaz, así como la clase de EscrituraTexto, que
-    * se encargará de rellenar el log
+     * En el constructor inicializamos los JTextField necesarios para poder
+     * poner en funcionamiento la interfaz, así como la clase de EscrituraTexto,
+     * que se encargará de rellenar el log
      */
     public SalaVacunacion(JTextField puesto1Txt, JTextField puesto2Txt, JTextField puesto3Txt, JTextField puesto4Txt, JTextField puesto5Txt, JTextField puesto6Txt, JTextField puesto7Txt, JTextField puesto8Txt, JTextField puesto9Txt, JTextField puesto10Txt, JTextField auxiliarTxt, JTextField vacunasDisponibles, EscrituraTexto et) {
         arrayTxt = new ArrayList<>();
@@ -103,9 +113,10 @@ public class SalaVacunacion {
     }
 
     /**
-    * El método entrar hará que un paciente entre a un puesto en la sala de Vacunación. 
-    * Tendrá un lock para que pasen de uno en uno, se comprueba si la sala está llena, 
-    * y si tiene acceso elegirá un puesto aleatorio para acceder a él. 
+     * El método entrar hará que un paciente entre a un puesto en la sala de
+     * Vacunación. Tendrá un lock para que pasen de uno en uno, se comprueba si
+     * la sala está llena, y si tiene acceso elegirá un puesto aleatorio para
+     * acceder a él.
      */
     public void entrar(Paciente p) throws BrokenBarrierException, InterruptedException { //entra el paciente a vacunarse
         lock.lock();
@@ -130,11 +141,10 @@ public class SalaVacunacion {
 
     }
 
-    
     /**
-    * El método salir se encargará de sacar a un paciente de la sala de Vacunación, 
-    * así como del puesto en el que se encontraba presente. 
-    */
+     * El método salir se encargará de sacar a un paciente de la sala de
+     * Vacunación, así como del puesto en el que se encontraba presente.
+     */
     public void salir(Paciente p) {
         lock.lock();
         try {
@@ -145,13 +155,13 @@ public class SalaVacunacion {
             lock.unlock();
         }
     }
-    
+
     /**
-    * El método sanitarioVacuna se encargará de proporcionar la vacuna a los pacientes
-    * Tiene un procedimiento parecido al de entrar. Se echa un lock, se comprueba si
-    * tiene espacio en la sala para acceder, se le deriva a un puesto de vacunación
-    * libre y pone la vacuna. 
-    */
+     * El método sanitarioVacuna se encargará de proporcionar la vacuna a los
+     * pacientes Tiene un procedimiento parecido al de entrar. Se echa un lock,
+     * se comprueba si tiene espacio en la sala para acceder, se le deriva a un
+     * puesto de vacunación libre y pone la vacuna.
+     */
     public void sanitarioVacuna(Sanitario s) throws InterruptedException, BrokenBarrierException { //aquí pongo la vacuna
         lock.lock();
         int eleccion;
@@ -174,13 +184,13 @@ public class SalaVacunacion {
     }
 
     /**
-    * El método salirSan se encarga de sacar al Sanitario para que deje libre
-    * su puesto.
-    */
+     * El método salirSan se encarga de sacar al Sanitario para que deje libre
+     * su puesto.
+     */
     public void salirSan(Sanitario s) {
         lock.lock();
         try {
-            
+
             puestoSanitario[s.getPuesto()] = null;
             ps--;
             esperaS.signal();
@@ -189,11 +199,10 @@ public class SalaVacunacion {
         }
     }
 
-    
     /**
-    * En el método haciendoVacunas el auxiliar 2 se encargará de hacer las vacunas
-    * para proporcionarlas a los sanitarios. 
-    */
+     * En el método haciendoVacunas el auxiliar 2 se encargará de hacer las
+     * vacunas para proporcionarlas a los sanitarios.
+     */
     public void haciendoVacunas(Auxiliar a) throws InterruptedException {
 
         for (int i = 0; i < 21; i++) {
@@ -206,13 +215,12 @@ public class SalaVacunacion {
         auxiliarTxt.setText("");
     }
 
-    
     /**
-    * El método cogeVacuna se encarga de liberar el semáforo de Vacuna que cierra
-    * el auxiliar a la hora de crear una vacuna, y luego se encarga de retirar una
-    * de las vacunas de la cola en la que se encuentra. Este método se le pasa
-    * a sanitarioVacuna para que cumpla su procedimiento. 
-    */    
+     * El método cogeVacuna se encarga de liberar el semáforo de Vacuna que
+     * cierra el auxiliar a la hora de crear una vacuna, y luego se encarga de
+     * retirar una de las vacunas de la cola en la que se encuentra. Este método
+     * se le pasa a sanitarioVacuna para que cumpla su procedimiento.
+     */
     public void cogeVacuna() throws InterruptedException {
 
         semaforoVacuna.acquire();
@@ -220,11 +228,11 @@ public class SalaVacunacion {
     }
 
     /**
-    * El método puestoPaciente se encarga de interactuar con puestoSanitario para
-    * conseguir que ambos, paciente y sanitario, acaben ocupando el mismo puesto
-    * para poder poner la vacuna. Es un juego de semáforos que conecta el puesto del
-    * paciente con el del sanitario. 
-    */
+     * El método puestoPaciente se encarga de interactuar con puestoSanitario
+     * para conseguir que ambos, paciente y sanitario, acaben ocupando el mismo
+     * puesto para poder poner la vacuna. Es un juego de semáforos que conecta
+     * el puesto del paciente con el del sanitario.
+     */
     public void puestoPaciente(Paciente p) throws InterruptedException, BrokenBarrierException {
 
         int eleccion = p.getPuesto();
@@ -297,8 +305,9 @@ public class SalaVacunacion {
     }
 
     /**
-    * Método complementario a puestoPaciente. En este, a parte, nos encargamos de imprimir
-    * imprimir qué paciente ha sido vacunado por qué sanitario y en qué puesto. 
+     * Método complementario a puestoPaciente. En este, a parte, nos encargamos
+     * de imprimir imprimir qué paciente ha sido vacunado por qué sanitario y en
+     * qué puesto.
      */
     public void puestoSanitario(Sanitario s) throws InterruptedException, BrokenBarrierException {
 
@@ -316,6 +325,10 @@ public class SalaVacunacion {
                 et.vacunacion(s, puestoPaciente[0], 1);
                 puesto1Txt.setText("");
                 puesto1.release();
+                if (cerrado1 == true) {
+                    s.setDescansoForzado(true);
+                    cerrado1 = false;
+                }
             }
             case 1 -> {
                 puesto2Txt.setText(puesto2Txt.getText() + " " + s.getIdentificador());
@@ -328,6 +341,10 @@ public class SalaVacunacion {
                 et.vacunacion(s, puestoPaciente[1], 2);
                 puesto2Txt.setText("");
                 puesto2.release();
+                if (cerrado2 == true) {
+                    s.setDescansoForzado(true);
+                    cerrado2 = false;
+                }
             }
 
             case 2 -> {
@@ -341,6 +358,10 @@ public class SalaVacunacion {
                 et.vacunacion(s, puestoPaciente[2], 3);
                 puesto3Txt.setText("");
                 puesto3.release();
+                if (cerrado3 == true) {
+                    s.setDescansoForzado(true);
+                    cerrado3 = false;
+                }
             }
             case 3 -> {
                 puesto4Txt.setText(puesto4Txt.getText() + " " + s.getIdentificador());
@@ -353,6 +374,10 @@ public class SalaVacunacion {
                 et.vacunacion(s, puestoPaciente[3], 4);
                 puesto4Txt.setText("");
                 puesto4.release();
+                if (cerrado4 == true) {
+                    s.setDescansoForzado(true);
+                    cerrado4 = false;
+                }
             }
             case 4 -> {
                 puesto5Txt.setText(puesto5Txt.getText() + " " + s.getIdentificador());
@@ -365,6 +390,10 @@ public class SalaVacunacion {
                 et.vacunacion(s, puestoPaciente[4], 5);
                 puesto5Txt.setText("");
                 puesto5.release();
+                if (cerrado5 == true) {
+                    s.setDescansoForzado(true);
+                    cerrado5 = false;
+                }
             }
             case 5 -> {
                 puesto6Txt.setText(puesto6Txt.getText() + " " + s.getIdentificador());
@@ -377,6 +406,10 @@ public class SalaVacunacion {
                 et.vacunacion(s, puestoPaciente[5], 6);
                 puesto6Txt.setText("");
                 puesto6.release();
+                if (cerrado6 == true) {
+                    s.setDescansoForzado(true);
+                    cerrado6 = false;
+                }
             }
             case 6 -> {
                 puesto7Txt.setText(puesto7Txt.getText() + " " + s.getIdentificador());
@@ -389,6 +422,10 @@ public class SalaVacunacion {
                 et.vacunacion(s, puestoPaciente[6], 7);
                 puesto7Txt.setText("");
                 puesto7.release();
+                if (cerrado7 == true) {
+                    s.setDescansoForzado(true);
+                    cerrado7 = false;
+                }
             }
             case 7 -> {
                 puesto8Txt.setText(puesto8Txt.getText() + " " + s.getIdentificador());
@@ -401,6 +438,10 @@ public class SalaVacunacion {
                 et.vacunacion(s, puestoPaciente[7], 8);
                 puesto8Txt.setText("");
                 puesto8.release();
+                if (cerrado8 == true) {
+                    s.setDescansoForzado(true);
+                    cerrado8 = false;
+                }
             }
             case 8 -> {
                 puesto9Txt.setText(puesto9Txt.getText() + " " + s.getIdentificador());
@@ -413,10 +454,13 @@ public class SalaVacunacion {
                 et.vacunacion(s, puestoPaciente[8], 9);
                 puesto9Txt.setText("");
                 puesto9.release();
+                if (cerrado9 == true) {
+                    s.setDescansoForzado(true);
+                    cerrado9 = false;
+                }
             }
             case 9 -> {
                 puesto10Txt.setText(puesto10Txt.getText() + " " + s.getIdentificador());
-
                 puesto10s.acquire();
                 cogeVacuna();
                 Thread.sleep((int) (Math.random() * ((5000 - 3000 + 1) + 3000)));
@@ -425,10 +469,57 @@ public class SalaVacunacion {
                 et.vacunacion(s, puestoPaciente[9], 10);
                 puesto10Txt.setText("");
                 puesto10.release();;
+                if (cerrado10 == true) {
+                    s.setDescansoForzado(true);
+                    cerrado10 = false;
+                }
             }
-
         }
+    }
 
+    /**
+     * cerrarPuesto1 establecerá la variable cerrado del puesto que le corresponda
+     * a true, para establecer que ese puesto está cerrado. Los 9 siguientes métodos
+     * para el resto de puestos cumplen la misma función que este
+     */
+    public void cerrarPuesto1() {
+        cerrado1 = true;
+    }
+    
+    public void cerrarPuesto2() {
+        cerrado2 = true;
+    }
+    
+    public void cerrarPuesto3() {
+        cerrado3 = true;
+    }
+    
+    public void cerrarPuesto4() {
+        cerrado4 = true;
+    }
+    
+    public void cerrarPuesto5() {
+        cerrado5 = true;
+    }
+    
+    public void cerrarPuesto6() {
+        cerrado6 = true;
+    }
+    
+    public void cerrarPuesto7() {
+        cerrado7 = true;
+    }
+    
+    public void cerrarPuesto8() {
+        cerrado8 = true;
+    }
+    
+    public void cerrarPuesto9() {
+        cerrado9 = true;
+    }
+    
+    public void cerrarPuesto10() {
+        cerrado10 = true;
     }
 
     public String getPuesto1Txt() {
@@ -447,15 +538,15 @@ public class SalaVacunacion {
         return puesto4Txt.getText();
     }
 
-    public String  getPuesto5Txt() {
+    public String getPuesto5Txt() {
         return puesto5Txt.getText();
     }
 
-    public String  getPuesto6Txt() {
+    public String getPuesto6Txt() {
         return puesto6Txt.getText();
     }
 
-    public String  getPuesto7Txt() {
+    public String getPuesto7Txt() {
         return puesto7Txt.getText();
     }
 
@@ -479,7 +570,4 @@ public class SalaVacunacion {
         return colaVacunas.size();
     }
 
-
-    
-    
 }

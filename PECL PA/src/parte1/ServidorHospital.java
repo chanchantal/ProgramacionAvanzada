@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package parte1;
 
 import java.io.DataInputStream;
@@ -14,8 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- *El hilo ServidorHospital tiene como atributos la clase Hospital, un servidor , una conexion , una entrada y una salida.
+ * El hilo ServidorHospital tiene como atributos la clase Hospital, un servidor
+ * , una conexion , una entrada y una salida.
  */
 public class ServidorHospital extends Thread {
 
@@ -35,9 +31,12 @@ public class ServidorHospital extends Thread {
             Logger.getLogger(ServidorHospital.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    /*
-  
-    */
+
+    /**
+     * El método run de esta clase nos permitirá manejar los sockets implementados para 
+     * llamar al caso necesario dependiendo del momento
+     */
+    @Override
     public void run() {
         try {
             while (true) {
@@ -47,19 +46,16 @@ public class ServidorHospital extends Thread {
 
                 int numero = entrada.readInt();//Leemos el numero del switch.Cada numero corresponde a una de las salas pertenecientes al hospital. 
                 switch (numero) {
-                    //Recepcion
-                    case 1:
+                    case 1 -> {
                         salida.writeUTF(hospital.getRecepcion().getColaEspera());//Le respondemos 
                         salida.writeUTF(hospital.getRecepcion().getPacienteTxt());
                         salida.writeUTF(hospital.getRecepcion().getAuxiliarTxt());
-                        break;
-                    //Sala Descanso
-                    case 2:
+                    }
+                    case 2 -> {
                         salida.writeUTF(hospital.getSalaDescanso().getColaDescansoTxtSan());
                         salida.writeUTF(hospital.getSalaDescanso().getColaDescansoTxtAux());
-                        break;
-                    //Sala Vacunacion
-                    case 3:
+                    }
+                    case 3 -> {
                         salida.writeUTF(hospital.getSalaVacunacion().getAuxiliarTxt());
                         salida.writeInt(hospital.getSalaVacunacion().VacunasDisponibles());
 
@@ -73,10 +69,8 @@ public class ServidorHospital extends Thread {
                         salida.writeUTF(hospital.getSalaVacunacion().getPuesto8Txt());
                         salida.writeUTF(hospital.getSalaVacunacion().getPuesto9Txt());
                         salida.writeUTF(hospital.getSalaVacunacion().getPuesto10Txt());
-                        break;
-                     //Sala de Observacion
-                    case 4:
-
+                    }
+                    case 4 -> {
                         salida.writeUTF(hospital.getSalaObservacion().getPuesto1Txt());
                         salida.writeUTF(hospital.getSalaObservacion().getPuesto2Txt());
                         salida.writeUTF(hospital.getSalaObservacion().getPuesto3Txt());
@@ -97,10 +91,23 @@ public class ServidorHospital extends Thread {
                         salida.writeUTF(hospital.getSalaObservacion().getPuesto18Txt());
                         salida.writeUTF(hospital.getSalaObservacion().getPuesto19Txt());
                         salida.writeUTF(hospital.getSalaObservacion().getPuesto20Txt());
-
-                        break;
+                    }
+                    case 5 -> hospital.getSalaVacunacion().cerrarPuesto1();
+                    case 6 -> hospital.getSalaVacunacion().cerrarPuesto2();
+                    case 7 -> hospital.getSalaVacunacion().cerrarPuesto3();
+                    case 8 -> hospital.getSalaVacunacion().cerrarPuesto4();
+                    case 9 -> hospital.getSalaVacunacion().cerrarPuesto5();
+                    case 10 -> hospital.getSalaVacunacion().cerrarPuesto6();
+                    case 11 -> hospital.getSalaVacunacion().cerrarPuesto7();
+                    case 12 -> hospital.getSalaVacunacion().cerrarPuesto8();
+                    case 13 -> hospital.getSalaVacunacion().cerrarPuesto9();
+                    case 14 -> hospital.getSalaVacunacion().cerrarPuesto10();
 
                 }
+                //Recepcion
+                //Sala Descanso
+                //Sala Vacunacion
+                //Sala de Observacion
                 entrada.close();//cerramos los canales de E/S
                 salida.close();
                 conexion.close();// cierra la conexion

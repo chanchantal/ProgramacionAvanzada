@@ -1,11 +1,10 @@
-
 package parte1;
 
-
-
-/*
-*La clase Hospital esta compuesta por la clase recepcion, salaDescanso, salaObservacion y salaVacunacion.
-*/
+/**
+ * La clase Hospital esta compuesta por la clase Recepcion, salaDescanso,
+ * salaObservacion y salaVacunacion. Usamos esta clase para agrupar todas las
+ * salas y poder tener un mejor manejo de las mismas
+ */
 public class Hospital {
 
     private Recepcion recepcion;
@@ -21,6 +20,11 @@ public class Hospital {
         this.salaVacunacion = salaVacunacion;
     }
 
+    /**
+     * Creamos los getter y setter para acceder a la recepción
+     *
+     * @return
+     */
     public Recepcion getRecepcion() {
         return recepcion;
     }
@@ -29,6 +33,11 @@ public class Hospital {
         this.recepcion = recepcion;
     }
 
+    /**
+     * Creamos los getter y setter para acceder a la sala de descanso
+     *
+     * @return
+     */
     public SalaDescanso getSalaDescanso() {
         return salaDescanso;
     }
@@ -37,6 +46,11 @@ public class Hospital {
         this.salaDescanso = salaDescanso;
     }
 
+    /**
+     * Creamos los getter y setter para acceder a la sala de observación
+     *
+     * @return
+     */
     public SalaObservacion getSalaObservacion() {
         return salaObservacion;
     }
@@ -45,6 +59,11 @@ public class Hospital {
         this.salaObservacion = salaObservacion;
     }
 
+    /**
+     * Creamos los getter y setter para acceder a la sala de vacunación
+     *
+     * @return
+     */
     public SalaVacunacion getSalaVacunacion() {
         return salaVacunacion;
     }
@@ -53,6 +72,4 @@ public class Hospital {
         this.salaVacunacion = salaVacunacion;
     }
 
-  
-    
 }

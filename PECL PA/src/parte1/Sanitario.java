@@ -7,17 +7,20 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/*
+/**
 *El hilo Sanitario tiene como atributos un identificador , la clase hospital y un puesto.
 */
 public class Sanitario extends Thread {
 
     private String identificador;
-    private final Lock lock = new ReentrantLock();
-    private Hospital hospital;
+    private final Hospital hospital;
     private int puesto;
-    /*
+    private boolean descansoForzado = false;
+    
+    /**
     *Dentro del constructor se creara el identificador del sanitario.
+     * @param id
+     * @param hospital
     */
     public Sanitario(int id, Hospital hospital) {
         if(id<10){
@@ -28,7 +31,9 @@ public class Sanitario extends Thread {
         this.hospital = hospital;
         
     }
-
+    /**
+     * Creamos los métodos setter y getter para poder acceder al identificador¡
+     */
     public String getIdentificador() {
         return identificador;
     }
@@ -44,8 +49,16 @@ public class Sanitario extends Thread {
     public void setPuesto(int puesto) {
         this.puesto = puesto;
     }
+
+    public boolean isDescansoForzado() {
+        return descansoForzado;
+    }
+
+    public void setDescansoForzado(boolean descansoForzado) {
+        this.descansoForzado = descansoForzado;
+    }
    
-    /*
+    /**
     *El metodo run() se encarga del funcionamiento de los sanitarios.
     *Los sanitarios acuden al hospital y se cambian (1-3 segundos).Posteriormente acuden al puesto de vacunacion, en dicho puesto
     *esperaran a que el auxiliar acabe de preparar la dosis. Inyectan la dosis en un intervalo de tiempo entre 3 y 5 segundos..
@@ -67,8 +80,13 @@ public class Sanitario extends Thread {
                 hospital.getSalaVacunacion().sanitarioVacuna(this);
                 hospital.getSalaVacunacion().puestoSanitario(this);
                 hospital.getSalaVacunacion().salirSan(this);
+                
+                if (descansoForzado == true){
+                    break;
+                }
                 }
                 hospital.getSalaDescanso().descansoSanitario(this);
+                descansoForzado = false;
             }
         } catch (InterruptedException | BrokenBarrierException ex) {
             Logger.getLogger(Sanitario.class.getName()).log(Level.SEVERE, null, ex);
