@@ -49,8 +49,8 @@ public class Recepcion {
 
 
     /**
-    * auxiliarRegistra se encargará de registrar a los pacientes que lleguen al hospital. 
-    * Lo hará 10 veces antes de proceder a tomarse un descanso. 
+    * auxiliarRegistra se encargará de registrar a los pacientes que lleguen al hospital.Lo hará 10 veces antes de proceder a tomarse un descanso.
+     * @param a 
     */
     public void auxiliarRegistra(Auxiliar a) throws InterruptedException, IOException {
         for (int i = 0; i < 10; i++) {
@@ -67,6 +67,7 @@ public class Recepcion {
 
     /**
     * El método pacienteEspera esperará a que el auxiliar 1 le registre.
+     * @param p
     */
     public void pacienteEspera(Paciente p) {
         try {
@@ -130,6 +131,7 @@ public class Recepcion {
     
     /**
     * Se encarga de devolver el auxiliar
+     * @return 
     */
     public Auxiliar getAuxiliar() {
         return auxiliar;
