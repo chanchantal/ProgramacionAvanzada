@@ -32,6 +32,9 @@ public class SalaDescanso {
      * En el constructor inicializamos los JTextField necesarios para poder
      * poner en funcionamiento la interfaz, así como la clase de EscrituraTexto,
      * que se encargará de rellenar el log
+     * @param colaDescansoTxtSan
+     * @param colaDescansoTxtAux
+     * @param et
      */
     public SalaDescanso(JTextField colaDescansoTxtSan, JTextField colaDescansoTxtAux, EscrituraTexto et) {
         this.colaDescansoTxtSan = colaDescansoTxtSan;
@@ -65,7 +68,7 @@ public class SalaDescanso {
      * Añade de nuevo los sanitarios a la cola de descansoS, hacen su descanso,
      * y salen.
      */
-    public boolean descansoSanitario(Sanitario s) throws InterruptedException {
+    public void descansoSanitario(Sanitario s) throws InterruptedException {
         lock.lock();
         try {
             et.inicioDescansoS(s);
@@ -80,7 +83,6 @@ public class SalaDescanso {
         } finally {
             lock.unlock();
         }
-        return true;
     }
 
     /**

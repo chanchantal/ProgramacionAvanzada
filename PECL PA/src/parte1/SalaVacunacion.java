@@ -158,9 +158,10 @@ public class SalaVacunacion {
 
     /**
      * El método sanitarioVacuna se encargará de proporcionar la vacuna a los
-     * pacientes Tiene un procedimiento parecido al de entrar. Se echa un lock,
-     * se comprueba si tiene espacio en la sala para acceder, se le deriva a un
-     * puesto de vacunación libre y pone la vacuna.
+     * pacientes Tiene un procedimiento parecido al de entrar.Se echa un lock,
+ se comprueba si tiene espacio en la sala para acceder, se le deriva a un
+ puesto de vacunación libre y pone la vacuna.
+     * @param s
      */
     public void sanitarioVacuna(Sanitario s) throws InterruptedException, BrokenBarrierException { //aquí pongo la vacuna
         lock.lock();
@@ -202,6 +203,7 @@ public class SalaVacunacion {
     /**
      * En el método haciendoVacunas el auxiliar 2 se encargará de hacer las
      * vacunas para proporcionarlas a los sanitarios.
+     * @param a
      */
     public void haciendoVacunas(Auxiliar a) throws InterruptedException {
 
@@ -230,75 +232,76 @@ public class SalaVacunacion {
     /**
      * El método puestoPaciente se encarga de interactuar con puestoSanitario
      * para conseguir que ambos, paciente y sanitario, acaben ocupando el mismo
-     * puesto para poder poner la vacuna. Es un juego de semáforos que conecta
-     * el puesto del paciente con el del sanitario.
+     * puesto para poder poner la vacuna.Es un juego de semáforos que conecta
+ el puesto del paciente con el del sanitario.
+     * @param p
      */
     public void puestoPaciente(Paciente p) throws InterruptedException, BrokenBarrierException {
 
         int eleccion = p.getPuesto();
         switch (eleccion) {
-            case 0:
+            case 0 -> {
                 puesto1Txt.setText(puesto1Txt.getText() + " " + p.getIdentificador());
 
                 puesto1s.release();
 
                 puesto1.acquire();
-                break;
-            case 1:
+            }
+            case 1 -> {
                 puesto2Txt.setText(puesto2Txt.getText() + " " + p.getIdentificador());
 
                 puesto2s.release();
                 puesto2.acquire();
-                break;
+            }
 
-            case 2:
+            case 2 -> {
                 puesto3Txt.setText(puesto3Txt.getText() + " " + p.getIdentificador());
 
                 puesto3s.release();
                 puesto3.acquire();
-                break;
-            case 3:
+            }
+            case 3 -> {
                 puesto4Txt.setText(puesto4Txt.getText() + " " + p.getIdentificador());
 
                 puesto4s.release();
                 puesto4.acquire();
-                break;
-            case 4:
+            }
+            case 4 -> {
                 puesto5Txt.setText(puesto5Txt.getText() + " " + p.getIdentificador());
 
                 puesto5s.release();
                 puesto5.acquire();
-                break;
-            case 5:
+            }
+            case 5 -> {
                 puesto6Txt.setText(puesto6Txt.getText() + " " + p.getIdentificador());
 
                 puesto6s.release();
                 puesto6.acquire();
-                break;
-            case 6:
+            }
+            case 6 -> {
                 puesto7Txt.setText(puesto7Txt.getText() + " " + p.getIdentificador());
 
                 puesto7s.release();
                 puesto7.acquire();
-                break;
-            case 7:
+            }
+            case 7 -> {
                 puesto8Txt.setText(puesto8Txt.getText() + " " + p.getIdentificador());
 
                 puesto8s.release();
                 puesto8.acquire();
-                break;
-            case 8:
+            }
+            case 8 -> {
                 puesto9Txt.setText(puesto9Txt.getText() + " " + p.getIdentificador());
 
                 puesto9s.release();
                 puesto9.acquire();
-                break;
-            case 9:
+            }
+            case 9 -> {
                 puesto10Txt.setText(puesto10Txt.getText() + " " + p.getIdentificador());
 
                 puesto10s.release();
                 puesto10.acquire();
-                break;
+            }
 
         }
 

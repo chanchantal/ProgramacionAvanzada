@@ -399,29 +399,29 @@ public class InterfazHospital extends javax.swing.JFrame {
         jPanelSalaObservacion.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, -1, -1));
 
         jLabel27.setText("Puesto 8");
-        jPanelSalaObservacion.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, -1, -1));
+        jPanelSalaObservacion.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, -1, -1));
 
         jLabel28.setText("Puesto 9");
-        jPanelSalaObservacion.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 40, -1, -1));
+        jPanelSalaObservacion.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 40, -1, -1));
 
         jLabel29.setText("Puesto 10");
-        jPanelSalaObservacion.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 40, -1, -1));
+        jPanelSalaObservacion.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 40, -1, -1));
 
         jLabel30.setText("Puesto 11");
         jPanelSalaObservacion.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 55, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 50, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO10, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 60, 50, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 55, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 50, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 60, 50, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 50, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO7, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, 50, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO8, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 50, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO9, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 60, 50, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO11, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 140, 50, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO13, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 50, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO12, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 50, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, 60, 70, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, 70, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO10, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 60, 80, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 70, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 70, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, 70, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 70, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, 70, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO8, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 70, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO9, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 60, 70, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO11, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 140, 70, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO13, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 70, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 70, -1));
 
         jLabel31.setText("Puesto 12");
         jPanelSalaObservacion.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
@@ -434,34 +434,34 @@ public class InterfazHospital extends javax.swing.JFrame {
 
         jLabel35.setText("Puesto 14");
         jPanelSalaObservacion.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, -1, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO15, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 50, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO14, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 48, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO15, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 70, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO14, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 70, -1));
 
         jTextFieldPuestoO16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPuestoO16ActionPerformed(evt);
             }
         });
-        jPanelSalaObservacion.add(jTextFieldPuestoO16, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 50, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO16, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 70, -1));
 
         jLabel33.setText("Puesto 16");
         jPanelSalaObservacion.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, -1, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO17, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 50, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO17, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 140, 70, -1));
 
         jLabel36.setText("Puesto 17");
         jPanelSalaObservacion.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, -1, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO18, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 140, 50, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO18, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 140, 70, -1));
 
         jLabel37.setText("Puesto 18");
         jPanelSalaObservacion.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, -1, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO19, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, 50, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO19, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 140, 70, -1));
 
         jLabel38.setText("Puesto 19");
-        jPanelSalaObservacion.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 120, -1, -1));
+        jPanelSalaObservacion.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 120, -1, -1));
 
         jLabel39.setText("Puesto 20");
-        jPanelSalaObservacion.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 120, -1, -1));
-        jPanelSalaObservacion.add(jTextFieldPuestoO20, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 140, 50, -1));
+        jPanelSalaObservacion.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 120, -1, -1));
+        jPanelSalaObservacion.add(jTextFieldPuestoO20, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 140, 80, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -472,7 +472,9 @@ public class InterfazHospital extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addComponent(jPanelSalaDescanso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanelSalaVacunacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanelSalaObservacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanelSalaObservacion, javax.swing.GroupLayout.PREFERRED_SIZE, 833, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
